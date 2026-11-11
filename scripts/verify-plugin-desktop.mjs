@@ -5,6 +5,7 @@ import path from "node:path";
 import os from "node:os";
 import { createHash } from "node:crypto";
 const require = createRequire(import.meta.url);
+const catalog = require("../electron/instruments.json");
 const packaged = process.argv[2];
 const profile = await mkdtemp(path.join(os.tmpdir(), "studiowav-plugins-ui-"));
 const env = { ...process.env, STUDIOWAV_PROFILE_DIR: profile };
@@ -28,11 +29,30 @@ try {
     page.getByRole("heading", { name: "Arreglo", exact: true }),
   ).toBeVisible();
   await page.evaluate(() => window.studioNative.request("init"));
-  const names = ["StudioWav Piano", "StudioWav Kick"];
+  const names = [
+    "StudioWav Triple",
+    "StudioWav FM",
+    "StudioWav Pluck",
+    "StudioWav Piano",
+    "StudioWav Kick",
+  ];
+  const chosen = Object.fromEntries(
+    names.map((name) => [
+      name,
+      name === "StudioWav FM" ? 2 : name === "StudioWav Pluck" ? 6 : 4,
+    ]),
+  );
   for (const name of names) {
     await page.keyboard.press("F8");
     const library = page.getByRole("region", { name: "Biblioteca VST3" });
     await expect(library).toBeVisible();
+    if (name === names[0])
+      await page.screenshot({
+        path: `test-results/studiowav-0.8-library-${packaged ? "packaged" : "development"}.png`,
+      });
+    await page
+      .getByLabel(`Preset de ${name}`, { exact: true })
+      .selectOption(String(chosen[name]));
     await page
       .getByRole("button", { name: `Añadir ${name}`, exact: true })
       .click();
@@ -55,7 +75,7 @@ try {
       .toBeGreaterThan(0.01);
     console.log(`${name}: added and auditioned through the rack.`);
   }
-  await expect(page.locator(".rack-row")).toHaveCount(10);
+  await expect(page.locator(".rack-row")).toHaveCount(13);
   await page
     .getByRole("button", { name: "Estudio de audio", exact: true })
     .click();
@@ -64,15 +84,22 @@ try {
   await page
     .getByLabel("Plugin para ajustar parámetros", { exact: true })
     .selectOption({ label: "StudioWav Kick" });
-  await expect(page.locator(".plugin-parameters input")).toHaveCount(9);
+  const preset = page.getByLabel("Preset del instrumento", { exact: true });
+  await expect(preset.locator("option")).toHaveCount(8);
+  await preset.selectOption({ label: "Warm tape" });
+  chosen["StudioWav Kick"] = 7;
   const level = page.getByLabel("Parámetro Level", { exact: true });
+  await expect(level).toHaveValue("0.73");
   await level.press("Home");
   for (let i = 0; i < 3; i++) await level.press("PageUp");
   await expect(level).toHaveValue("0.3");
   await page.getByRole("button", { name: "Abrir", exact: true }).click();
-  await expect(page.locator(".audio-panel-body")).toHaveAttribute("aria-busy", "false");
+  await expect(page.locator(".audio-panel-body")).toHaveAttribute(
+    "aria-busy",
+    "false",
+  );
   await page.screenshot({
-    path: `test-results/studiowav-0.5-plugins-${packaged ? "packaged" : "development"}.png`,
+    path: `test-results/studiowav-0.8-plugins-${packaged ? "packaged" : "development"}.png`,
   });
   await page
     .getByRole("button", { name: "Cerrar estudio de audio", exact: true })
@@ -99,7 +126,7 @@ try {
         return 0;
       }
     })
-    .toBe(2);
+    .toBe(5);
   const pluginTrack = saved.tracks.find((t) => t.name === "StudioWav Kick");
   const slot = pluginTrack.plugins[0];
   expect(slot.description).toContain('file="studiowav-bundled:kick"');
@@ -126,6 +153,25 @@ try {
       { timeout: 15000 },
     )
     .toBeCloseTo(0.3, 3);
+  const restoredPresets = {};
+  for (const name of names) {
+    const t = saved.tracks.find((t) => t.name === name);
+    const bank = Object.values(catalog).find((p) => p.name === name);
+    const parameters = await page.evaluate(
+      (args) => window.studioNative.request("parameters", args),
+      { trackId: t.id, pluginId: t.plugins[0].id },
+    );
+    const text = parameters.find((p) => p.name === "Program").text;
+    expect(text).toBe(bank.presets[chosen[name]].name);
+    if (bank.kind >= 2) {
+      const opened = await page.evaluate(
+        (args) => window.studioNative.request("editor", args),
+        { trackId: t.id, pluginId: t.plugins[0].id },
+      );
+      expect(opened.opened).toBe(true);
+    }
+    restoredPresets[name] = text;
+  }
   await page
     .getByRole("button", { name: "Escuchar StudioWav Kick", exact: true })
     .click();
@@ -150,9 +196,13 @@ try {
           .digest("hex")
       : undefined,
     instruments: names,
-    tracks: 10,
+    tracks: 13,
+    presetsChosenBeforeAdding: true,
+    presetChangedThroughPanel: true,
+    restoredPresets,
     rackAudition: true,
     nativeEditorOpened: true,
+    newSynthEditorsOpened: true,
     stateRestoredAfterRestart: true,
     restoredLevel: 0.3,
     stableBundledReferences: true,

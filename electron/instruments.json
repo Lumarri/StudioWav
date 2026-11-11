@@ -1,0 +1,52 @@
+{
+  "piano": { "name": "StudioWav Piano", "target": "Piano", "code": "SwPn", "kind": 0, "category": "Piano de síntesis", "presets": [
+    { "name": "Studio grand", "values": { "level": 0.75, "tone": 0.48, "decay": 4.2, "release": 180, "hammer": 0.22, "width": 0.65 } },
+    { "name": "Soft felt", "values": { "level": 0.8, "tone": 0.15, "decay": 3.2, "release": 280, "hammer": 0.06, "width": 0.45 } },
+    { "name": "Bright stage", "values": { "level": 0.7, "tone": 0.85, "decay": 2.7, "release": 110, "hammer": 0.5, "width": 0.8 } },
+    { "name": "Long strings", "values": { "level": 0.65, "tone": 0.55, "decay": 9, "release": 650, "hammer": 0.15, "width": 0.9 } },
+    { "name": "Midnight felt", "values": { "level": 0.85, "tone": 0.08, "decay": 5.4, "release": 420, "hammer": 0.03, "width": 0.3 } },
+    { "name": "Glass room", "values": { "level": 0.6, "tone": 0.95, "decay": 6.8, "release": 850, "hammer": 0.15, "width": 1 } },
+    { "name": "Dry upright", "values": { "level": 0.8, "tone": 0.38, "decay": 1.6, "release": 65, "hammer": 0.42, "width": 0.18 } },
+    { "name": "Wide ballad", "values": { "level": 0.7, "tone": 0.6, "decay": 7.6, "release": 480, "hammer": 0.12, "width": 0.95 } }
+  ] },
+  "kick": { "name": "StudioWav Kick", "target": "Kick", "code": "SwKk", "kind": 1, "category": "Bombo sintetizado", "presets": [
+    { "name": "Round kick", "values": { "level": 0.75, "tune": 48, "sweep": 125, "pitchDecay": 38, "decay": 440, "click": 0.18, "drive": 0.12 } },
+    { "name": "Deep 808", "values": { "level": 0.7, "tune": 38, "sweep": 85, "pitchDecay": 24, "decay": 1500, "click": 0.08, "drive": 0.22 } },
+    { "name": "Short punch", "values": { "level": 0.75, "tune": 58, "sweep": 190, "pitchDecay": 18, "decay": 170, "click": 0.5, "drive": 0.15 } },
+    { "name": "Hard drive", "values": { "level": 0.65, "tune": 52, "sweep": 220, "pitchDecay": 32, "decay": 380, "click": 0.45, "drive": 0.8 } },
+    { "name": "Sub floor", "values": { "level": 0.7, "tune": 32, "sweep": 45, "pitchDecay": 45, "decay": 2100, "click": 0.02, "drive": 0.15 } },
+    { "name": "Warehouse", "values": { "level": 0.68, "tune": 47, "sweep": 270, "pitchDecay": 65, "decay": 720, "click": 0.3, "drive": 0.55 } },
+    { "name": "Tight electro", "values": { "level": 0.8, "tune": 65, "sweep": 160, "pitchDecay": 12, "decay": 120, "click": 0.65, "drive": 0.3 } },
+    { "name": "Warm tape", "values": { "level": 0.73, "tune": 43, "sweep": 110, "pitchDecay": 50, "decay": 520, "click": 0.12, "drive": 0.4 } }
+  ] },
+  "triple": { "name": "StudioWav Triple", "target": "Triple", "code": "SwTr", "kind": 2, "category": "Tres osciladores · sustractivo", "presets": [
+    { "name": "Wide sunrise", "values": { "level": 0.75, "attack": 10, "decay": 700, "sustain": 0.7, "release": 350, "cutoff": 9500, "wave1": 1, "wave2": 1, "wave3": 1, "detune": 9, "mix": 0.65, "tune3": 0 } },
+    { "name": "Sub foundation", "values": { "level": 0.85, "attack": 3, "decay": 250, "sustain": 0.85, "release": 90, "cutoff": 1200, "wave1": 0, "wave2": 3, "wave3": 0, "detune": 0, "mix": 0.5, "tune3": -12 } },
+    { "name": "Arcade pulse", "values": { "level": 0.65, "attack": 2, "decay": 300, "sustain": 0.6, "release": 120, "cutoff": 7000, "wave1": 2, "wave2": 2, "wave3": 0, "detune": 4, "mix": 0.45, "tune3": 12 } },
+    { "name": "Cloud pad", "values": { "level": 0.8, "attack": 650, "decay": 1600, "sustain": 0.75, "release": 2200, "cutoff": 3800, "wave1": 1, "wave2": 3, "wave3": 1, "detune": 18, "mix": 0.8, "tune3": 0 } },
+    { "name": "Fifth avenue", "values": { "level": 0.7, "attack": 20, "decay": 600, "sustain": 0.65, "release": 450, "cutoff": 6200, "wave1": 1, "wave2": 2, "wave3": 1, "detune": 6, "mix": 0.6, "tune3": 7 } },
+    { "name": "Neon stab", "values": { "level": 0.8, "attack": 3, "decay": 190, "sustain": 0.05, "release": 100, "cutoff": 4200, "wave1": 1, "wave2": 2, "wave3": 3, "detune": 12, "mix": 0.75, "tune3": 0 } },
+    { "name": "Soft triangle", "values": { "level": 0.85, "attack": 30, "decay": 1000, "sustain": 0.55, "release": 650, "cutoff": 5000, "wave1": 3, "wave2": 0, "wave3": 3, "detune": 5, "mix": 0.4, "tune3": 12 } },
+    { "name": "Copper lead", "values": { "level": 0.7, "attack": 8, "decay": 450, "sustain": 0.8, "release": 180, "cutoff": 12000, "wave1": 2, "wave2": 1, "wave3": 1, "detune": 14, "mix": 0.55, "tune3": -12 } }
+  ] },
+  "fm": { "name": "StudioWav FM", "target": "FM", "code": "SwFm", "kind": 3, "category": "FM · tres operadores", "presets": [
+    { "name": "Crystal keys", "values": { "level": 0.85, "attack": 3, "decay": 1800, "sustain": 0.2, "release": 550, "cutoff": 14000, "ratio1": 2, "ratio2": 3, "index1": 2.5, "index2": 0.8, "feedback": 0.1, "modDecay": 800 } },
+    { "name": "Electric velvet", "values": { "level": 0.9, "attack": 5, "decay": 2200, "sustain": 0.25, "release": 700, "cutoff": 6500, "ratio1": 1, "ratio2": 2, "index1": 1.4, "index2": 0.3, "feedback": 0.05, "modDecay": 550 } },
+    { "name": "Glass bell", "values": { "level": 0.75, "attack": 2, "decay": 4800, "sustain": 0, "release": 1800, "cutoff": 17000, "ratio1": 3.5, "ratio2": 5, "index1": 4, "index2": 1.2, "feedback": 0.15, "modDecay": 2800 } },
+    { "name": "Rubber bass", "values": { "level": 0.85, "attack": 2, "decay": 550, "sustain": 0.55, "release": 120, "cutoff": 3000, "ratio1": 1, "ratio2": 1, "index1": 5, "index2": 0.8, "feedback": 0.2, "modDecay": 160 } },
+    { "name": "Metal mallet", "values": { "level": 0.75, "attack": 1, "decay": 900, "sustain": 0, "release": 250, "cutoff": 11000, "ratio1": 6, "ratio2": 7.5, "index1": 6, "index2": 3, "feedback": 0.3, "modDecay": 300 } },
+    { "name": "Slow aurora", "values": { "level": 0.8, "attack": 900, "decay": 2500, "sustain": 0.65, "release": 2500, "cutoff": 8000, "ratio1": 1.5, "ratio2": 2.5, "index1": 2, "index2": 1.5, "feedback": 0.1, "modDecay": 4000 } },
+    { "name": "Reed motion", "values": { "level": 0.8, "attack": 35, "decay": 650, "sustain": 0.75, "release": 300, "cutoff": 7500, "ratio1": 1, "ratio2": 3, "index1": 3.5, "index2": 0.5, "feedback": 0.5, "modDecay": 1600 } },
+    { "name": "Digital spark", "values": { "level": 0.7, "attack": 1, "decay": 320, "sustain": 0.1, "release": 130, "cutoff": 15000, "ratio1": 8, "ratio2": 11, "index1": 7.5, "index2": 4, "feedback": 0.65, "modDecay": 180 } }
+  ] },
+  "pluck": { "name": "StudioWav Pluck", "target": "Pluck", "code": "SwPk", "kind": 4, "category": "Cuerda pulsada · modelo físico", "presets": [
+    { "name": "Nylon morning", "values": { "level": 0.9, "attack": 1, "decay": 2800, "sustain": 0.2, "release": 350, "cutoff": 10000, "brightness": 0.65, "damping": 0.9, "pick": 0.2, "body": 0.25 } },
+    { "name": "Steel wire", "values": { "level": 0.8, "attack": 1, "decay": 4000, "sustain": 0.15, "release": 650, "cutoff": 16000, "brightness": 0.95, "damping": 0.98, "pick": 0.65, "body": 0.1 } },
+    { "name": "Muted palm", "values": { "level": 0.95, "attack": 1, "decay": 220, "sustain": 0, "release": 65, "cutoff": 4500, "brightness": 0.5, "damping": 0.5, "pick": 0.4, "body": 0.35 } },
+    { "name": "Harp lights", "values": { "level": 0.85, "attack": 2, "decay": 6500, "sustain": 0.1, "release": 1800, "cutoff": 13000, "brightness": 0.85, "damping": 0.99, "pick": 0.1, "body": 0.4 } },
+    { "name": "Wood thumb", "values": { "level": 0.9, "attack": 2, "decay": 850, "sustain": 0.05, "release": 220, "cutoff": 6500, "brightness": 0.45, "damping": 0.8, "pick": 0.8, "body": 0.6 } },
+    { "name": "Warm pizzicato", "values": { "level": 0.85, "attack": 4, "decay": 1200, "sustain": 0.1, "release": 300, "cutoff": 3500, "brightness": 0.35, "damping": 0.85, "pick": 0.3, "body": 0.7 } },
+    { "name": "Glass string", "values": { "level": 0.8, "attack": 1, "decay": 5000, "sustain": 0.05, "release": 1200, "cutoff": 18000, "brightness": 0.99, "damping": 0.995, "pick": 0.55, "body": 0.05 } },
+    { "name": "Deep resonator", "values": { "level": 0.95, "attack": 3, "decay": 3500, "sustain": 0.25, "release": 850, "cutoff": 2600, "brightness": 0.6, "damping": 0.95, "pick": 0.15, "body": 0.9 } }
+  ] }
+}

@@ -1,0 +1,1153 @@
+{
+  "version": 1,
+  "name": "Cinco instrumentos · StudioWav",
+  "bpm": 112,
+  "swing": 0,
+  "master": 0.65,
+  "bars": 8,
+  "tracks": [
+    {
+      "id": "5a29c39e-a316-433a-ae2c-53e4df205a43",
+      "name": "StudioWav Piano",
+      "instrument": "keys",
+      "color": "#a6c7e8",
+      "gain": 0.7,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0,
+      "plugins": [
+        {
+          "id": "a4d34fc6-42a6-4663-8841-354575f108c1",
+          "name": "StudioWav Piano",
+          "description": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<PLUGIN name=\"StudioWav Piano\" format=\"VST3\" category=\"Instrument|Synth\"\r\n        manufacturer=\"StudioWav\" version=\"0.8.0\" file=\"studiowav-bundled:piano\"\r\n        uniqueId=\"bcf5f942\" isInstrument=\"1\" fileTime=\"1a1b1b47410\" infoUpdateTime=\"1a1cce11676\"\r\n        numInputs=\"0\" numOutputs=\"0\" isShell=\"0\" hasARAExtension=\"0\"\r\n        uid=\"1e8610ec\"/>\r\n",
+          "instrument": true,
+          "bypassed": false,
+          "state": "696.VMjLg7p....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9PyL33hUMoFSmQzUt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSSE0Uio1ZwD1UEw1XIQSLhoWRWM1bUwVX5EjPhgGNwjEdEYUX3fjPMg1LC8DTEoFUAACQH8VTV8DZPYUVoUjUjglKnM1Y2Y0XqASZHAyLB0jctLDS14xTMICRowjcPMUSzfDdKkicCQUPIUETMEjTZoFLogjaEYUXyUEahglKnM1Y2Y0XqASZHY2LBwTdtLDS14xPLYGQSwDMHMDSzfzTNg1Mn8zMtTETRUDUSYlZFkENHITXqk0UYIWRBgTLEYTXvTkUOglKoszLTMDS14xPLYGR4wzLPMESyPUdMQCR3sTN1MDUAkTUP0TPRokZvjFR3UkQgsVQwH1ZIIDRwTjQgASUV8DZPkFS1MiPLYmKCwTdtLUS2I1TMIiYSwDZ2f1S23RUPIUQTMkYpYTV3fjPiUGMVkEZtf1XmcmUisFLogjcyHDSy3xPLYmKCwjcTkVSwfzPMoGQowDLHg2R4X2PTETRUAUSAIkVpASZHIyZFkkdmwFRlg0UXIWUWkENHIDSzwzPLYmKCwjctLES2oVZLYmZowDMHg2R4XWdKMUTWMlZqESXWUDaikDMwHldIc0XyUEagoGMC4hKt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQtDDQlAEMAcEV40zQtDDQ14hK5EjKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UXwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C."
+        }
+      ]
+    },
+    {
+      "id": "02a2dde2-b8ce-4227-883e-475dab127daa",
+      "name": "StudioWav Kick",
+      "instrument": "kick",
+      "color": "#edaa70",
+      "gain": 0.55,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0,
+      "plugins": [
+        {
+          "id": "67f1e3f9-ece6-4fde-91c6-54551b667fed",
+          "name": "StudioWav Kick",
+          "description": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<PLUGIN name=\"StudioWav Kick\" format=\"VST3\" category=\"Instrument|Synth\"\r\n        manufacturer=\"StudioWav\" version=\"0.8.0\" file=\"studiowav-bundled:kick\"\r\n        uniqueId=\"bcf5f43f\" isInstrument=\"1\" fileTime=\"1a1b1b47415\" infoUpdateTime=\"1a1cce11678\"\r\n        numInputs=\"0\" numOutputs=\"0\" isShell=\"0\" hasARAExtension=\"0\"\r\n        uid=\"1e86104e\"/>\r\n",
+          "instrument": true,
+          "bypassed": false,
+          "state": "726.VMjLgzr....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9PiMv3hUMoFSmIFVt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSSE0Uio1ZwD1UEw1XIQSLhoWRWM1bUwVX5EjPhgGNwjEdEYUX3fDdMg1LC8DTEoFUAACQH8VTV8DZLYTXu0TLZglKnM1Y2Y0XqASZHY2LRwDdtLDS14xPLYGT40TLlkGSxPTZMg1Mn8zMtTETRUDUSYlZFkENHITVq0jUXQSRBgTLEYTXvTkUOgFUowjcyHDSncCZOciKUAkTEQ0TlolQYgCRBkEdqw1XqkjPHESQFEFLUY0Sn4RZKomKCwjctLDS14xTMQCVCwjdXMTSvfDdKkicCQUPIUETMEjTZoFLogjbUw1XqcGaHYFVWgkbUcUV3fjPLQmX4wjctLDS14xTLQiK40TdPMjSwvTZHU2LC8DTEoFUAACQH8VTV8DZtbkV50jQZQTUwf0Yq0FRlg0UXIWUWkENHIUS1MiPLYmKCwjcLMjS2AUZMQiXowjLHg2R4X2PTETRUAUSAIkVpASZHk2XWk0ZA0FRlg0UXIWUWkENHIES24RZKYmKCwjctjWSwfzTNkmZC0DLHg2R4X2PTETRUAUSAIkVpASZHoWUsE1ZIIDRwTjQgASUV8DZPkGSz4RZHU2LC8TcLUzXvDkUZU2XUgULqoVX4EUahACLVkEcQ01St3hKt3hKt3hKt3hKJUELPUTPqI1aYcEV5UkQQcVTWgkKDAkKBs1QhcVSxHlKDAkKC4BTG4hKt3hKt3hKt3FUUMTUDQEdqw1XmE0UYQTQFM1YAwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C."
+        }
+      ]
+    },
+    {
+      "id": "b66ecbd2-7dab-4279-8462-342b807480fa",
+      "name": "StudioWav Triple",
+      "instrument": "keys",
+      "color": "#c1a1e0",
+      "gain": 0.5,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0,
+      "plugins": [
+        {
+          "id": "e156b580-81a0-47bb-ab33-922a447b60a0",
+          "name": "StudioWav Triple",
+          "description": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<PLUGIN name=\"StudioWav Triple\" format=\"VST3\" category=\"Instrument|Synth\"\r\n        manufacturer=\"StudioWav\" version=\"0.8.0\" file=\"studiowav-bundled:triple\"\r\n        uniqueId=\"bcf5fd46\" isInstrument=\"1\" fileTime=\"1a1ccd9f54b\" infoUpdateTime=\"1a1cce1167a\"\r\n        numInputs=\"0\" numOutputs=\"0\" isShell=\"0\" hasARAExtension=\"0\"\r\n        uid=\"1e86116c\"/>\r\n",
+          "instrument": true,
+          "bypassed": false,
+          "state": "912.VMjLgb3....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCLv3hUMoFSmwzYt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSSE0Uio1ZwD1UEw1XSsVago2YFgjcIISXskzUXMGLogzcHIDRuQSLhoWRWM1bUwVX5ASZHoWRWokc2YUVnMyPOAUQpQUPvPDRuEkUOgFQFMldEECVwkjPHESQFEFLUY0SnwTZKYGR3sTN1MDUAkTUP0TPRokZvjFRoU0QiUWVrkEZtf1XmcmUisFLogzcHMDS1MiPLg1Mn8zMtTETRUDUSYlZFkENHITVq0jUXQSRBgTLEYTXvTkUOgFRS0jcyHDS14xPLcGUowDLlkWSyn1TLg1Mn8zMtTETRUDUSYlZFkENHITVqE0UiQWUrgjYXcEVxU0UYgCRBwDctjFR0MyPOAUQpQUPvPDRuEkUOglcVkULUYTXn4BZic1cVM1ZvjFR1MiPNAiKCwjctLDS3wzPNoGQC4DLhMkSncCZOciKUAkTEQ0TlolQYgCRRE1am0FRlg0UXIWUWkENHIDSzQUZHU2LC8DTEoFUAACQH8VTV8DZHcUVxUkUXkWUrgjYXcEVxU0UYgCRR4jcyHDSncCZOciKUAkTEQ0TlolQYgCR3IFLMczXmsFagglKnM1Y2Y0XqASZHY2LB4DLtLDS14xPLgGSC4jdDMjSvH1TNg1Mn8zMtTETRUDUSYlZFkENHIzXvPiUYkGRBgTLEYTXvTkUOgldRwDdyHDSncCZOciKUAkTEQ0TlolQYgCR3M1YYcUV2gjPHESQFEFLUY0Sn4RZKYGR3sTN1MDUAkTUP0TPRokZvjFRxTDaisVRogjYXcEVxU0UYgCR3wDctjFR0MyPOAUQpQUPvPDRuEkUOglXWgULUECSn4BZic1cVM1ZvjFR1MiPLg1Mn8zM2fGU5U0QY8FNwT0YYICUzPiQi4FMC4hKt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQtDDQlAEMAcEV40zQtDDQ14hK5EjKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UXwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C."
+        }
+      ]
+    },
+    {
+      "id": "8c95a518-b0ac-40e9-8cf3-76d9b14b1166",
+      "name": "StudioWav FM",
+      "instrument": "keys",
+      "color": "#8cccb5",
+      "gain": 0.38,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0,
+      "plugins": [
+        {
+          "id": "0e15c04e-4bfc-4160-928a-1ffa660ab1f3",
+          "name": "StudioWav FM",
+          "description": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<PLUGIN name=\"StudioWav FM\" format=\"VST3\" category=\"Instrument|Synth\"\r\n        manufacturer=\"StudioWav\" version=\"0.8.0\" file=\"studiowav-bundled:fm\"\r\n        uniqueId=\"bcf5ef41\" isInstrument=\"1\" fileTime=\"1a1ccd9f54f\" infoUpdateTime=\"1a1cce1167b\"\r\n        numInputs=\"0\" numOutputs=\"0\" isShell=\"0\" hasARAExtension=\"0\"\r\n        uid=\"1e860fb5\"/>\r\n",
+          "instrument": true,
+          "bypassed": false,
+          "state": "978.VMjLgj7....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCM43hUMoFSmAkZt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSSE0Uio1ZwD1UEw1XSsVago2YFgjcIISXskzUXMGLogzcHIDRuQSLhoWRWM1bUwVX5ASZHwFLrgTN1MDUAkTUP0TPRokZvjFRmE0QicVSwnEZtf1XmcmUisFLogDLyHDSncCZOciKUAkTEQ0TlolQYgCR3gELQISXrkEaHYFVWgkbUcUV3fDZMAiKCwDctLDS2AUZMomYC0TdhMUSncCZOciKUAkTEQ0TlolQYgCRBk0ZMYEVzjjPHESQFEFLUY0SngTZLYmKosjcHg2R4X2PTETRUAUSAIkVpASZHwVUVkkZIYEVoMGaHYFVWgkbUcUV3fjPLQmKS0jctLDS14xPLYmXC0DLtLUSy3RZMg1Mn8zMtTETRUDUSYlZFkENHIkVzEkUYMSQogjYXcEVxU0UYgCRRwDcPMDS14xPLYmKS4DLLkVSx.UdLgGR3sTN1MDUAkTUP0TPRokZvjFRuQiQYs1YswDZtf1XmcmUisFLogjcyfGS14xPLYmKCwzcDMkS34xTNgmZogTcyLzSPUjZTEDLDgzaQY0SnYmUYESUFEFZtf1XmcmUisFLogjcyHkS14xPLYmKCwTdTkWSwfTdMMCVS4DZ2f1S23RUPIUQTMkYpYTV3fjTgUWTFE0ZMYEVzjjPHESQFEFLUY0SnQ0TMY2LBwDZ2f1S23RUPIUQTMkYpYTV3fDZhcVTWoUcEkFRlg0UXIWUWkENHIESz4RZHU2LC8DTEoFUAACQH8VTV8DZHcEV5sVLggGRBgTLEYTXvTkUOgFRosjcHg2R4X2PTETRUAUSAIkVpASZHgWUFE1ZEEiXqkjPHESQFEFLUY0SnI1PLY2LBwjctLDSwPzPLkGUSwDLXkFSncCZOciKUAkTEQ0TlolQYgCR3IFLMczXmsFagglKnM1Y2Y0XqASZHY2LnwDLHg2R4XWdKMUTWMlZqESXWUDaiM0ZsEldmw1St3hKt3hKt3hKt3hKJUELPUTPqI1aYcEV5UkQQcVTWgkKDAkKBs1QhcVSxHlKDAkKC4BTG4hKt3hKt3hKt3FUUMTUDQEdqw1XmE0UYQTQFM1YAwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C."
+        }
+      ]
+    },
+    {
+      "id": "fc3ce877-6591-476c-90a9-2191208d0004",
+      "name": "StudioWav Pluck",
+      "instrument": "keys",
+      "color": "#e5b8a2",
+      "gain": 0.7,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0,
+      "plugins": [
+        {
+          "id": "9cc964b4-dfe1-46b0-8592-fa9700540b17",
+          "name": "StudioWav Pluck",
+          "description": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<PLUGIN name=\"StudioWav Pluck\" format=\"VST3\" category=\"Instrument|Synth\"\r\n        manufacturer=\"StudioWav\" version=\"0.8.0\" file=\"studiowav-bundled:pluck\"\r\n        uniqueId=\"bcf5f93f\" isInstrument=\"1\" fileTime=\"1a1ccd9f54f\" infoUpdateTime=\"1a1cce1167d\"\r\n        numInputs=\"0\" numOutputs=\"0\" isShell=\"0\" hasARAExtension=\"0\"\r\n        uid=\"1e8610e9\"/>\r\n",
+          "instrument": true,
+          "bypassed": false,
+          "state": "924.VMjLgL4....O+fWarAhckI2bo8la8HRLt.iHfTlai8FYo41Y8HRUTYTK3HxO9.BOVMEUy.Ea0cVZtMEcgQWY9vSRC8Vav8lak4Fc9XCL43hUMoFSmY2Yt3hKt7zJlcUXxEDZisVRxH1a3vVX3fjTLQmKogjYTwVXogiQY8FMwjENHIUUTkEUKMCR38TNtHzSSE0Uio1ZwD1UEw1XSsVago2YFgjcIISXskzUXMGLogjcHIDRuQSLhoWRWM1bUwVX5ASZHY2cVMVZywFR4X2PTETRUAUSAIkVpASZHcVTGM1YMEiVn4BZic1cVM1ZvjFR2MiPLg1Mn8zMtTETRUDUSYlZFkENHgFV0EkUjglKnM1Y2Y0XqASZHY2LnwDLHg2R4X2PTETRUAUSAIkVpASZHgVRWoUamYzXzUULhkWRBgTLEYTXvTkUOglKosTLTMDS14xPLYGSS0jLXkFSxXVZMQCR3sTN1MDUAkTUP0TPRokZvjFRoU0QiUWVrkEZtf1XmcmUisFLogzctLDS14RZKYmKowDMHMkSwXVdMACR3sTN1MDUAkTUP0TPRokZvjFRpUjUgY2ZrEVaIIDRwTjQgASUV8DZtj1Rz3xPLYmKCwjcLMUSxfUZLIiYo0DMHg2R4X2PTETRUAUSAIkVpASZHoVUwf0Yq0FRlg0UXIWUWkENHgFSy3xPLQmKCwjcPMjSyfzPNcGRS0DZ2f1S23RUPIUQTMkYpYTV3fjPgsVVWkkbIIDRwTjQgASUV8DZtj1Rz3xPLYmKCwjcLMUSxfUZLIiYo0DMHg2R4X2PTETRUAUSAIkVpASZHY2ZwfUbIIDRwTjQgASUV8DZtj1R34xPLYmKCwjctjFSzX1PLgGSowDdHg2R4X2PTETRUAUSAIkVpASZHgWUFE1ZEEiXqkjPHESQFEFLUY0SnwzTMY2LBwjctLDSwPzPLkGUSwDLXkFSncCZOciKUAkTEQ0TlolQYgCR3IFLMczXmsFagglKnM1Y2Y0XqASZHY2LnwjctLDS14xPLYGRS4zLtjFS4gTZLg1Mn8zM2fGU5U0QY8FNwT0YYICUzPiQi4FMC4hKt3hKt3hKt3hKlIUUMQUTPkzUZESQFM1ZQQEV5UjQtDDQlAEMAcEV40zQtDDQ14hK5EjKt3hKt3hKt3hRUACTEEzZh8VVWgkdUYTTmE0UXwyKIMzasA2atUlaz4COuX0TTMCTrU2Yo41TzEFck4C."
+        }
+      ]
+    }
+  ],
+  "patterns": [
+    {
+      "id": "84db8818-ed8e-4278-b205-a2f1e334b6db",
+      "name": "StudioWav Piano",
+      "length": 16,
+      "channels": {
+        "5a29c39e-a316-433a-ae2c-53e4df205a43": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "fedbc28f-a21b-429f-a269-f45f10f0053f",
+              "pitch": 60,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.7
+            },
+            {
+              "id": "a84bf380-9756-4e70-9df4-c24c3009c52d",
+              "pitch": 64,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.7
+            },
+            {
+              "id": "be29e725-9ce1-47af-9463-4d3009a65d6b",
+              "pitch": 67,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.7
+            },
+            {
+              "id": "5ed231bb-48a4-436d-95a5-6b5ca8023c7e",
+              "pitch": 57,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.65
+            },
+            {
+              "id": "0e74aa85-dd2b-4745-b2d7-d4e0a11614ff",
+              "pitch": 60,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.65
+            },
+            {
+              "id": "24544c14-a6b1-4937-9164-36ab39ce7287",
+              "pitch": 64,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.65
+            }
+          ]
+        },
+        "02a2dde2-b8ce-4227-883e-475dab127daa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "b66ecbd2-7dab-4279-8462-342b807480fa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "8c95a518-b0ac-40e9-8cf3-76d9b14b1166": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "fc3ce877-6591-476c-90a9-2191208d0004": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        }
+      }
+    },
+    {
+      "id": "23d47411-b2ea-4585-b3cd-9097e773e56f",
+      "name": "StudioWav Kick",
+      "length": 16,
+      "channels": {
+        "5a29c39e-a316-433a-ae2c-53e4df205a43": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "02a2dde2-b8ce-4227-883e-475dab127daa": {
+          "steps": [
+            0.8,
+            0,
+            0,
+            0,
+            0.8,
+            0,
+            0,
+            0,
+            0.8,
+            0,
+            0,
+            0,
+            0.8,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "b66ecbd2-7dab-4279-8462-342b807480fa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "8c95a518-b0ac-40e9-8cf3-76d9b14b1166": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "fc3ce877-6591-476c-90a9-2191208d0004": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        }
+      }
+    },
+    {
+      "id": "154e4c72-fc09-42ea-b3ec-a3a90c260db9",
+      "name": "StudioWav Triple",
+      "length": 16,
+      "channels": {
+        "5a29c39e-a316-433a-ae2c-53e4df205a43": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "02a2dde2-b8ce-4227-883e-475dab127daa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "b66ecbd2-7dab-4279-8462-342b807480fa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "89ed0778-0874-4dc4-81b6-71091e6c7563",
+              "pitch": 36,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.75
+            },
+            {
+              "id": "10e78d01-a50e-40bf-8a96-33790823d915",
+              "pitch": 33,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.75
+            }
+          ]
+        },
+        "8c95a518-b0ac-40e9-8cf3-76d9b14b1166": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "fc3ce877-6591-476c-90a9-2191208d0004": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        }
+      }
+    },
+    {
+      "id": "97eb2f72-5502-42b3-8362-34974f9a22fa",
+      "name": "StudioWav FM",
+      "length": 16,
+      "channels": {
+        "5a29c39e-a316-433a-ae2c-53e4df205a43": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "02a2dde2-b8ce-4227-883e-475dab127daa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "b66ecbd2-7dab-4279-8462-342b807480fa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "8c95a518-b0ac-40e9-8cf3-76d9b14b1166": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "e89be8d5-080e-4ae3-9c6a-b6e72fe15a74",
+              "pitch": 72,
+              "start": 0,
+              "length": 2,
+              "velocity": 0.7
+            },
+            {
+              "id": "a3d5f214-0aa8-4172-8591-d8c2ed7f8994",
+              "pitch": 76,
+              "start": 4,
+              "length": 2,
+              "velocity": 0.7
+            },
+            {
+              "id": "2982e845-60ed-4d4c-9b40-40e0997a916f",
+              "pitch": 79,
+              "start": 8,
+              "length": 2,
+              "velocity": 0.7
+            },
+            {
+              "id": "aa4d0202-29c4-4409-9c23-485ece5dca8c",
+              "pitch": 76,
+              "start": 12,
+              "length": 2,
+              "velocity": 0.7
+            }
+          ]
+        },
+        "fc3ce877-6591-476c-90a9-2191208d0004": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        }
+      }
+    },
+    {
+      "id": "5792b818-4116-431b-9b18-7ee9f5b46747",
+      "name": "StudioWav Pluck",
+      "length": 16,
+      "channels": {
+        "5a29c39e-a316-433a-ae2c-53e4df205a43": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "02a2dde2-b8ce-4227-883e-475dab127daa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "b66ecbd2-7dab-4279-8462-342b807480fa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "8c95a518-b0ac-40e9-8cf3-76d9b14b1166": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "fc3ce877-6591-476c-90a9-2191208d0004": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "6801bd9b-6d35-40f6-9ff3-952b5f759e4a",
+              "pitch": 60,
+              "start": 0,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "61eed415-89cf-4d69-bf10-e2397e6cf1c4",
+              "pitch": 64,
+              "start": 2,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "5a19fa22-1e41-4a42-b856-b0485ba19228",
+              "pitch": 67,
+              "start": 4,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "5e3028bc-8985-4bcc-a281-4e6e33d557f8",
+              "pitch": 72,
+              "start": 6,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "7d410ccb-2afb-4bb1-ba80-49eee61376cb",
+              "pitch": 57,
+              "start": 8,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "0de9e0da-2e1e-400f-ba78-98f3cc21182f",
+              "pitch": 60,
+              "start": 10,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "1a8bd5b8-a907-446a-9f3f-251011441573",
+              "pitch": 64,
+              "start": 12,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "66c535dd-cc95-4210-8f25-94a582cf5fee",
+              "pitch": 69,
+              "start": 14,
+              "length": 1.5,
+              "velocity": 0.8
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "321a92c5-4d91-4881-96d2-e5f2156aec2d",
+      "name": "Todos juntos",
+      "length": 16,
+      "channels": {
+        "5a29c39e-a316-433a-ae2c-53e4df205a43": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "5b8b96c2-401f-4dff-bca4-44b4e21fff5c",
+              "pitch": 60,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.7
+            },
+            {
+              "id": "5d0295fa-f073-4767-8079-52a8659e7858",
+              "pitch": 64,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.7
+            },
+            {
+              "id": "c781681b-fbc9-4fb0-9277-d7fe73190de6",
+              "pitch": 67,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.7
+            },
+            {
+              "id": "2c8d0cc1-c6e5-4bf4-a970-51a5a4775089",
+              "pitch": 57,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.65
+            },
+            {
+              "id": "f989c6e1-2927-4af2-8fe7-163fe7041334",
+              "pitch": 60,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.65
+            },
+            {
+              "id": "dd37ba2d-b288-4dc8-a0fa-007c5e0a5d79",
+              "pitch": 64,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.65
+            }
+          ]
+        },
+        "02a2dde2-b8ce-4227-883e-475dab127daa": {
+          "steps": [
+            0.8,
+            0,
+            0,
+            0,
+            0.8,
+            0,
+            0,
+            0,
+            0.8,
+            0,
+            0,
+            0,
+            0.8,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "b66ecbd2-7dab-4279-8462-342b807480fa": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "ab39c6ca-d8cb-4054-878a-14b9f5506e3c",
+              "pitch": 36,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.75
+            },
+            {
+              "id": "abd3d673-d280-44f9-99ce-1e4708be8a22",
+              "pitch": 33,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.75
+            }
+          ]
+        },
+        "8c95a518-b0ac-40e9-8cf3-76d9b14b1166": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "dda264ad-4303-487f-ae84-f47ee31bc298",
+              "pitch": 72,
+              "start": 0,
+              "length": 2,
+              "velocity": 0.7
+            },
+            {
+              "id": "69426f65-469d-4cce-91a2-987cb8949787",
+              "pitch": 76,
+              "start": 4,
+              "length": 2,
+              "velocity": 0.7
+            },
+            {
+              "id": "8e8f675d-8db3-4ce6-a611-3dcd3c991c2f",
+              "pitch": 79,
+              "start": 8,
+              "length": 2,
+              "velocity": 0.7
+            },
+            {
+              "id": "8c8820ce-79f1-442e-80b2-d3b2db7b0a13",
+              "pitch": 76,
+              "start": 12,
+              "length": 2,
+              "velocity": 0.7
+            }
+          ]
+        },
+        "fc3ce877-6591-476c-90a9-2191208d0004": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "4cfc2a95-448b-480e-9fc2-c20a2a968648",
+              "pitch": 60,
+              "start": 0,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "035227c2-d469-428b-87c7-43b3644a243b",
+              "pitch": 64,
+              "start": 2,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "2b64b3b1-21c6-4965-a439-539554d77e50",
+              "pitch": 67,
+              "start": 4,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "8a009fd8-16f8-4c4d-8702-d407c3a1578c",
+              "pitch": 72,
+              "start": 6,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "c7cbae1e-ce37-42e5-b317-7f193ba47639",
+              "pitch": 57,
+              "start": 8,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "073808b6-5e63-482f-9f70-e85aadffd5bc",
+              "pitch": 60,
+              "start": 10,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "b56d551c-90a6-4a4e-b2b7-b5908ebd7377",
+              "pitch": 64,
+              "start": 12,
+              "length": 1.5,
+              "velocity": 0.8
+            },
+            {
+              "id": "55baff3b-34ba-4546-a848-19063e074cd1",
+              "pitch": 69,
+              "start": 14,
+              "length": 1.5,
+              "velocity": 0.8
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "326d79bb-7ab5-4745-a92a-cff4d064c52a",
+      "trackId": "5a29c39e-a316-433a-ae2c-53e4df205a43",
+      "patternId": "84db8818-ed8e-4278-b205-a2f1e334b6db",
+      "laneId": "ab39af12-9696-4e55-b3c4-8c4c7f9ad927",
+      "scope": "pattern",
+      "startBar": 0,
+      "lengthBars": 1,
+      "loop": false
+    },
+    {
+      "id": "26be53e6-ce0c-45ed-aeaf-30b6d3a6e300",
+      "trackId": "5a29c39e-a316-433a-ae2c-53e4df205a43",
+      "patternId": "23d47411-b2ea-4585-b3cd-9097e773e56f",
+      "laneId": "ab39af12-9696-4e55-b3c4-8c4c7f9ad927",
+      "scope": "pattern",
+      "startBar": 1,
+      "lengthBars": 1,
+      "loop": false
+    },
+    {
+      "id": "a6d357c0-c91a-40a7-ab9c-2589401811e5",
+      "trackId": "5a29c39e-a316-433a-ae2c-53e4df205a43",
+      "patternId": "154e4c72-fc09-42ea-b3ec-a3a90c260db9",
+      "laneId": "ab39af12-9696-4e55-b3c4-8c4c7f9ad927",
+      "scope": "pattern",
+      "startBar": 2,
+      "lengthBars": 1,
+      "loop": false
+    },
+    {
+      "id": "2dc4be8c-c949-4864-b697-2e0e6cf422cd",
+      "trackId": "5a29c39e-a316-433a-ae2c-53e4df205a43",
+      "patternId": "97eb2f72-5502-42b3-8362-34974f9a22fa",
+      "laneId": "ab39af12-9696-4e55-b3c4-8c4c7f9ad927",
+      "scope": "pattern",
+      "startBar": 3,
+      "lengthBars": 1,
+      "loop": false
+    },
+    {
+      "id": "b9bb8528-9024-4c4f-8a28-1d0bcd367779",
+      "trackId": "5a29c39e-a316-433a-ae2c-53e4df205a43",
+      "patternId": "5792b818-4116-431b-9b18-7ee9f5b46747",
+      "laneId": "ab39af12-9696-4e55-b3c4-8c4c7f9ad927",
+      "scope": "pattern",
+      "startBar": 4,
+      "lengthBars": 1,
+      "loop": false
+    },
+    {
+      "id": "04452270-52eb-4f66-8453-b5911402a8a0",
+      "trackId": "5a29c39e-a316-433a-ae2c-53e4df205a43",
+      "patternId": "321a92c5-4d91-4881-96d2-e5f2156aec2d",
+      "laneId": "ab39af12-9696-4e55-b3c4-8c4c7f9ad927",
+      "scope": "pattern",
+      "startBar": 5,
+      "lengthBars": 3,
+      "loop": true
+    }
+  ],
+  "samples": [],
+  "lanes": [
+    {
+      "id": "ab39af12-9696-4e55-b3c4-8c4c7f9ad927",
+      "name": "Cinco instrumentos",
+      "color": "#a6c7e8",
+      "muted": false
+    }
+  ]
+}

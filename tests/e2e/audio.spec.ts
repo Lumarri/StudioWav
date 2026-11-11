@@ -13,20 +13,32 @@ test("sample audition plays beyond initial silence", async ({ page }) => {
     buffer: Buffer.from(encodeWav([samples], 44100)),
   });
   await expect(page.locator(".playlist-row")).toHaveCount(9);
-  await page
-    .getByRole("button", { name: "Escuchar sonido", exact: true })
-    .click();
-  await expect
-    .poll(
-      async () =>
-        Number.parseFloat(
-          await page
-            .locator(".mini-master > span")
-            .evaluate((node) => (node as HTMLElement).style.width),
+  // Preserve the peak of this short audition, even if tracing delays a poll.
+  await page.locator(".mini-master > span").evaluate((node: HTMLElement) => {
+    node.dataset.auditionPeak = "0";
+    new MutationObserver(() => {
+      node.dataset.auditionPeak = String(
+        Math.max(
+          Number(node.dataset.auditionPeak),
+          Number.parseFloat(node.style.width),
         ),
-      { intervals: [50], timeout: 3000 },
-    )
-    .toBeGreaterThan(2);
+      );
+    }).observe(node, { attributes: true, attributeFilter: ["style"] });
+  });
+  await Promise.all([
+    page.getByRole("button", { name: "Escuchar sonido", exact: true }).click(),
+    expect
+      .poll(
+        async () =>
+          Number.parseFloat(
+            (await page
+              .locator(".mini-master > span")
+              .getAttribute("data-audition-peak")) ?? "0",
+          ),
+        { intervals: [50], timeout: 3000 },
+      )
+      .toBeGreaterThan(2),
+  ]);
 });
 
 test("buses and sends survive saving", async ({ page }) => {

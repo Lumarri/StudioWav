@@ -59,7 +59,7 @@ function fundamental(data, low, high) {
 }
 try {
   const checks = [];
-  for (const name of ["Piano", "Kick"]) {
+  for (const name of ["Piano", "Kick", "Triple", "FM", "Pluck"]) {
     const exe = path.resolve(
       `native/build/StudioWav${name}Check_artefacts/Release/StudioWav${name}Check.exe`,
     );
@@ -73,7 +73,7 @@ try {
   }
   await audio.request("init");
   const library = await audio.request("bundledPlugins");
-  assert.equal(library.length, 2);
+  assert.equal(library.length, 5);
   const results = [];
   for (const plugin of library) {
     let p = createProject(false);
@@ -101,7 +101,7 @@ try {
     const onset = original.findIndex((x) => Math.abs(x) > 3 / 32768);
     assert.ok(onset >= 2756 && onset < 2856, `${plugin.name}: ${onset}`);
     const originalRms = rms(original);
-    assert.ok(originalRms > 0.005, `${plugin.name} is silent`);
+    assert.ok(originalRms > 0.005, `${plugin.name} RMS ${originalRms} is too low`);
     const soft = await render(60, 0.3);
     assert.ok(
       originalRms > rms(soft) * 1.8,
@@ -125,16 +125,29 @@ try {
       "VST3 state did not restore audio",
     );
     slot.bypassed = true;
-    assert.equal(rms(await render()), 0, "Bypassing a generator activated the built-in fallback");
+    assert.equal(
+      rms(await render()),
+      0,
+      "Bypassing a generator activated the built-in fallback",
+    );
     slot.bypassed = false;
     await render();
-    const program = params.find(parameter => parameter.name === "Program");
+    const program = params.find((parameter) => parameter.name === "Program");
     assert.ok(program, "VST3 presets are not exposed");
-    await audio.request("parameter", { ...args, index: program.index, value: 1 });
+    await audio.request("parameter", {
+      ...args,
+      index: program.index,
+      value: 1,
+    });
     await render();
-    const selectedProgram = (await audio.request("parameters", args)).find(parameter => parameter.name === "Program");
-    assert.equal(selectedProgram.text, plugin.bundledId === "piano" ? "Long strings" : "Hard drive");
-    await audio.request("project", { ...nativeProject(p, "pattern", pattern.id), restoreStates: true });
+    const selectedProgram = (await audio.request("parameters", args)).find(
+      (parameter) => parameter.name === "Program",
+    );
+    assert.equal(selectedProgram.text, plugin.presetNames.at(-1));
+    await audio.request("project", {
+      ...nativeProject(p, "pattern", pattern.id),
+      restoreStates: true,
+    });
     await render();
     let frequencies;
     if (plugin.bundledId === "piano") {
@@ -142,7 +155,7 @@ try {
       const c5 = fundamental(await render(72), 500, 550);
       assert.ok(Math.abs(c4 - 261.63) < 2 && Math.abs(c5 / c4 - 2) < 0.02);
       frequencies = { c4, c5 };
-    } else {
+    } else if (plugin.bundledId === "kick") {
       const decayIndex = params.find((x) => x.name === "Decay ms").index;
       await audio.request("parameter", {
         ...args,
@@ -155,6 +168,33 @@ try {
       assert.ok(
         rms(long.slice(start, end)) > rms(original.slice(start, end)) * 5,
         "Kick decay does not affect its tail",
+      );
+    } else {
+      const toneParameter = params.find(
+        (p) =>
+          p.name ===
+          (plugin.bundledId === "triple"
+            ? "Osc 1: sine/saw/pulse/triangle"
+            : plugin.bundledId === "fm"
+              ? "Modulator 1 index"
+              : "String brightness"),
+      );
+      assert.ok(toneParameter, "Missing synthesis control");
+      await audio.request("parameter", {
+        ...args,
+        index: toneParameter.index,
+        value: 0,
+      });
+      const changed = await render();
+      const difference = Math.sqrt(
+        changed.reduce(
+          (sum, sample, i) => sum + (sample - original[i]) ** 2,
+          0,
+        ) / changed.length,
+      );
+      assert.ok(
+        difference > 0.0001,
+        `${plugin.name}: synthesis control has no effect`,
       );
     }
     results.push({
@@ -169,6 +209,7 @@ try {
       stateRestored: true,
       bypassProducesSilence: true,
       hostPresetChange: true,
+      presets: plugin.presetNames,
       velocity: true,
       frequencies,
     });
@@ -177,17 +218,28 @@ try {
     );
   }
   await mkdir("test-results", { recursive: true });
-  const demo = JSON.parse(await readFile("examples/Piano y kicks.studiowav", "utf8"));
-  await audio.request("project", nativeProject(demo, "song", demo.patterns[0].id));
-  const demoAudio = (await audio.request("render", { sampleRate: 44100, bitDepth: 16 })).audio;
+  const demo = JSON.parse(
+    await readFile("examples/Piano y kicks.studiowav", "utf8"),
+  );
+  await audio.request(
+    "project",
+    nativeProject(demo, "song", demo.patterns[0].id),
+  );
+  const demoAudio = (
+    await audio.request("render", { sampleRate: 44100, bitDepth: 16 })
+  ).audio;
   const demoRms = rms(pcm(demoAudio));
-  assert.ok(demoRms > .01, "The bundled example is silent");
+  assert.ok(demoRms > 0.01, "The bundled example is silent");
   await writeFile("test-results/piano-y-kicks.wav", Buffer.from(demoAudio));
   const report = {
     passed: true,
     checks,
     vst3: results,
-    demo: { file: "examples/Piano y kicks.studiowav", rms: demoRms, rendered: true },
+    demo: {
+      file: "examples/Piano y kicks.studiowav",
+      rms: demoRms,
+      rendered: true,
+    },
     method:
       "Actual compiled plugin tests and StudioWav native host offline WAV rendering",
   };

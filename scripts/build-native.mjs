@@ -1,6 +1,7 @@
 import { spawnSync } from "node:child_process";
 import {
   existsSync,
+  readFileSync,
   readdirSync,
   mkdirSync,
   copyFileSync,
@@ -98,11 +99,20 @@ copyFileSync(
   path.resolve("THIRD_PARTY_NOTICES.md"),
   path.join(licenseRoot, "THIRD_PARTY_NOTICES.md"),
 );
-copyFileSync(path.resolve("LICENSE"), path.join(licenseRoot, "StudioWav-AGPL-3.0.txt"));
-copyFileSync(path.resolve("licenses/GPL-3.0-only.txt"), path.join(licenseRoot, "GPL-3.0-only.txt"));
+copyFileSync(
+  path.resolve("LICENSE"),
+  path.join(licenseRoot, "StudioWav-AGPL-3.0.txt"),
+);
+copyFileSync(
+  path.resolve("licenses/GPL-3.0-only.txt"),
+  path.join(licenseRoot, "GPL-3.0-only.txt"),
+);
 if (!existsSync(path.join(root, "bin/StudioWavAudio.exe")))
   throw new Error("No se generó el backend de audio.");
-for (const name of ["Piano", "Kick"]) {
+const catalog = JSON.parse(
+  readFileSync(path.resolve("electron/instruments.json"), "utf8"),
+);
+for (const { target: name } of Object.values(catalog)) {
   const bundle = `StudioWav ${name}.vst3`;
   const source = path.join(
     root,

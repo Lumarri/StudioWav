@@ -20,7 +20,9 @@ test("bundled projects resolve at the current install path while external plugin
   });
   const [a, b] = await Promise.all([library.bundled(), library.bundled()]);
   assert.deepEqual(a, b);
-  assert.equal(calls, 2);
+  assert.equal(calls, 5);
+  assert.equal(a.length, 5);
+  for (const plugin of a) assert.equal(plugin.presetNames.length, 8);
   const saved = {
     tracks: [
       {

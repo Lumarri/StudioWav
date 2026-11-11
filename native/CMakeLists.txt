@@ -15,23 +15,36 @@ if(MSVC)
   target_compile_options(StudioWavAudio PRIVATE /bigobj /utf-8)
 endif()
 
-foreach(kind Piano Kick)
+juce_add_binary_data(StudioWavPresetData HEADER_NAME StudioWavPresetData.h NAMESPACE swpresets
+  SOURCES ../electron/instruments.json)
+file(READ "${CMAKE_CURRENT_SOURCE_DIR}/../electron/instruments.json" instrument_catalog)
+string(JSON instrument_count LENGTH "${instrument_catalog}")
+math(EXPR instrument_last "${instrument_count} - 1")
+foreach(index RANGE 0 ${instrument_last})
+  string(JSON instrument_id MEMBER "${instrument_catalog}" ${index})
+  string(JSON kind GET "${instrument_catalog}" ${instrument_id} target)
+  string(JSON instrument_kind GET "${instrument_catalog}" ${instrument_id} kind)
+  string(JSON instrument_code GET "${instrument_catalog}" ${instrument_id} code)
+  string(JSON instrument_name GET "${instrument_catalog}" ${instrument_id} name)
   set(instrument_target StudioWav${kind})
-  if(kind STREQUAL "Kick")
-    set(instrument_code SwKk)
+  if(instrument_kind EQUAL 1)
     set(instrument_kick 1)
   else()
-    set(instrument_code SwPn)
     set(instrument_kick 0)
   endif()
   juce_add_plugin(${instrument_target} COMPANY_NAME StudioWav PLUGIN_MANUFACTURER_CODE StWv
-    PLUGIN_CODE ${instrument_code} FORMATS VST3 PRODUCT_NAME "StudioWav ${kind}"
-    VERSION 0.5.0 IS_SYNTH TRUE NEEDS_MIDI_INPUT TRUE NEEDS_MIDI_OUTPUT FALSE
+    PLUGIN_CODE ${instrument_code} FORMATS VST3 PRODUCT_NAME "${instrument_name}"
+    VERSION 0.8.0 IS_SYNTH TRUE NEEDS_MIDI_INPUT TRUE NEEDS_MIDI_OUTPUT FALSE
     COPY_PLUGIN_AFTER_BUILD FALSE)
-  target_sources(${instrument_target} PRIVATE Instruments.cpp)
+  if(instrument_kind LESS 2)
+    target_sources(${instrument_target} PRIVATE Instruments.cpp PresetBank.h)
+  else()
+    target_sources(${instrument_target} PRIVATE Synths.cpp PresetBank.h)
+  endif()
   target_compile_definitions(${instrument_target} PUBLIC JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0
-    JUCE_VST3_CAN_REPLACE_VST2=0 STUDIOWAV_KICK=${instrument_kick})
-  target_link_libraries(${instrument_target} PRIVATE juce::juce_audio_utils juce::juce_recommended_config_flags)
+    JUCE_VST3_CAN_REPLACE_VST2=0 STUDIOWAV_KICK=${instrument_kick} STUDIOWAV_KIND=${instrument_kind}
+    STUDIOWAV_INSTRUMENT_ID="${instrument_id}")
+  target_link_libraries(${instrument_target} PRIVATE StudioWavPresetData juce::juce_audio_utils juce::juce_recommended_config_flags)
   juce_add_console_app(${instrument_target}Check PRODUCT_NAME "${instrument_target}Check")
   target_sources(${instrument_target}Check PRIVATE InstrumentCheck.cpp)
   target_include_directories(${instrument_target}Check PRIVATE vendor/JUCE-8.0.12/modules)

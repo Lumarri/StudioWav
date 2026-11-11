@@ -1,6 +1,6 @@
 {
   "name": "studiowav",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "private": true,
   "license": "AGPL-3.0-only",
   "repository": {
@@ -15,7 +15,7 @@
     "node": ">=24"
   },
   "type": "module",
-  "description": "Estación de producción musical por patrones para Windows",
+  "description": "EstaciÃ³n de producciÃ³n musical por patrones para Windows",
   "author": "StudioWav",
   "main": "electron/main.cjs",
   "allowScripts": {
@@ -27,7 +27,7 @@
     "desktop": "node scripts/desktop.mjs",
     "start": "electron .",
     "build": "tsc --noEmit && vite build",
-    "test": "node --test tests/project.test.ts tests/native-lifecycle.test.cjs tests/music-tools.test.ts tests/plugins.test.ts tests/plugin-library.test.cjs tests/midi.test.ts tests/channel-effects.test.ts",
+    "test": "node --test tests/project.test.ts tests/native-lifecycle.test.cjs tests/music-tools.test.ts tests/plugins.test.ts tests/plugin-library.test.cjs tests/midi.test.ts tests/channel-effects.test.ts tests/instrument-bank.test.cjs",
     "test:e2e": "playwright test",
     "native:setup": "python scripts/setup-native-tools.py",
     "native:build": "node scripts/build-native.mjs",
@@ -54,7 +54,7 @@
     "appId": "dev.studiowav.app",
     "productName": "StudioWav",
     "directories": {
-      "output": "release/0.7.0"
+      "output": "release/0.8.0"
     },
     "files": [
       "dist/**/*",

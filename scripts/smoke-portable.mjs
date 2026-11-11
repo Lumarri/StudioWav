@@ -75,7 +75,13 @@ try {
   expect(status.backend).toBe("native");
   await page.getByRole("button", { name: "Detener", exact: true }).click();
   const auditioned = [];
-  for (const name of ["StudioWav Piano", "StudioWav Kick"]) {
+  for (const name of [
+    "StudioWav Piano",
+    "StudioWav Kick",
+    "StudioWav Triple",
+    "StudioWav FM",
+    "StudioWav Pluck",
+  ]) {
     await page.keyboard.press("F8");
     await page
       .getByRole("button", { name: `Añadir ${name}`, exact: true })

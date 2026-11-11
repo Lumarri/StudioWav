@@ -2,6 +2,7 @@
 #include <array>
 #include <atomic>
 #include <cmath>
+#include "PresetBank.h"
 
 // Original StudioWav synthesis. No Image-Line code, binaries or samples.
 namespace {
@@ -168,27 +169,14 @@ public:
   bool producesMidi() const override { return false; }
   bool isMidiEffect() const override { return false; }
   double getTailLengthSeconds() const override { return kick ? 4 : 48; }
-  int getNumPrograms() override { return 4; }
+  int getNumPrograms() override { return swbank::count(); }
   int getCurrentProgram() override { return program.load(); }
   const juce::String getProgramName(int index) override {
-    const char *piano[] = {"Studio grand", "Soft felt", "Bright stage", "Long strings"};
-    const char *drums[] = {"Round kick", "Deep 808", "Short punch", "Hard drive"};
-    return (kick ? drums : piano)[juce::jlimit(0, 3, index)];
+    return swbank::name(index);
   }
   void setCurrentProgram(int index) override {
-    index = juce::jlimit(0, 3, index); program.store(index);
-    const char *pianoIds[] = {"level", "tone", "decay", "release", "hammer", "width"};
-    const char *kickIds[] = {"level", "tune", "sweep", "pitchDecay", "decay", "click", "drive"};
-    const float piano[4][6] = {{.75f,.48f,4.2f,180,.22f,.65f},{.8f,.15f,3.2f,280,.06f,.45f},
-                              {.7f,.85f,2.7f,110,.5f,.8f},{.65f,.55f,9,650,.15f,.9f}};
-    const float drums[4][7] = {{.75f,48,125,38,440,.18f,.12f},{.7f,38,85,24,1500,.08f,.22f},
-                              {.75f,58,190,18,170,.5f,.15f},{.65f,52,220,32,380,.45f,.8f}};
-    for (int i = 0; i < (kick ? 7 : 6); ++i) {
-      auto *p = state.getParameter((kick ? kickIds : pianoIds)[i]);
-      p->beginChangeGesture();
-      p->setValueNotifyingHost(p->convertTo0to1(kick ? drums[index][i] : piano[index][i]));
-      p->endChangeGesture();
-    }
+    index = swbank::clamp(index); program.store(index);
+    swbank::apply(state, index);
   }
   void changeProgramName(int, const juce::String &) override {}
   bool hasEditor() const override { return true; }
@@ -198,7 +186,7 @@ public:
       title.setText(p.getName() + " | Original synthesis", juce::dontSendNotification);
       title.setColour(juce::Label::textColourId, juce::Colours::lightgreen);
       addAndMakeVisible(title); addAndMakeVisible(presets); addAndMakeVisible(controls);
-      for (int i = 0; i < 4; ++i) presets.addItem(p.getProgramName(i), i + 1);
+      for (int i = 0; i < p.getNumPrograms(); ++i) presets.addItem(p.getProgramName(i), i + 1);
       presets.setSelectedId(p.getCurrentProgram() + 1, juce::dontSendNotification);
       presets.onChange = [&] { owner.setCurrentProgram(presets.getSelectedId() - 1); };
       setSize(480, controls.getHeight() + 88); startTimerHz(5);
@@ -226,7 +214,7 @@ public:
     if (auto xml = getXmlFromBinary(data, bytes))
       if (xml->hasTagName(state.state.getType())) {
         auto tree = juce::ValueTree::fromXml(*xml);
-        program.store(juce::jlimit(0, 3, (int)tree.getProperty("program", 0)));
+        program.store(swbank::clamp((int)tree.getProperty("program", 0)));
         state.replaceState(tree);
       }
   }

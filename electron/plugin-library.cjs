@@ -1,7 +1,10 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 
-const instruments = { piano: "StudioWav Piano", kick: "StudioWav Kick" };
+const catalog = require("./instruments.json");
+const instruments = Object.fromEntries(
+  Object.entries(catalog).map(([id, value]) => [id, value.name]),
+);
 function escapeXml(value) {
   return value
     .replaceAll("&", "&amp;")
@@ -38,6 +41,8 @@ class PluginLibrary {
           plugins.push({
             ...plugin,
             bundledId: id,
+            presetNames: catalog[id].presets.map((p) => p.name),
+            category: catalog[id].category,
             description: plugin.description.replace(
               /\bfile="[^"]*"/,
               `file="studiowav-bundled:${id}"`,

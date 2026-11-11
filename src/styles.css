@@ -2697,4 +2697,12 @@ svg {
 .compressor-reduction i { display: block; height: 100%; background: #e5b37d; transition: width .1s; }
 .compressor-reduction output { min-width: 50px; text-align: right; }
 .audio-tabs { flex-wrap: wrap; }
+.library-instrument { background: #202831; border: 1px solid #3b4651; border-radius: 6px; overflow: hidden; }
+.vst-instrument-options .library-instrument > button { display: flex; align-items: center; gap: 10px; padding: 13px 10px; text-align: left; width: 100%; min-height: 72px; border: 0; border-radius: 0; background: transparent; }
+.library-instrument > button > div { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 0; }
+.library-instrument > button > svg { color: #9fc4b1; flex-shrink: 0; }
+.vst-instrument-options { max-height: 360px; }
+.library-preset { display: flex; align-items: center; gap: 10px; padding: 0 12px 12px; color: #b9c5d0; font-size: 11px; }
+.library-preset select { flex: 1; min-width: 0; background: #303e48; color: #e8edf1; border: 1px solid #52616b; border-radius: 4px; padding: 7px; }
+.plugin-preset-select { grid-column: 1 / -1; }
 @media (max-width: 700px) { .channel-effect-controls { grid-template-columns: 1fr; } }

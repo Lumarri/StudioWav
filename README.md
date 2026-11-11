@@ -1,22 +1,26 @@
-# StudioWav 0.7
+# StudioWav 0.8
 
-DAW de escritorio para Windows con piano y kick VST3 propios, biblioteca de plugins instalados, patrones con varios instrumentos, Playlist independiente y herramientas de edición musical. Conserva el motor C++ propio, ASIO/WASAPI, grabación, entrada MIDI y efectos VST3. REA se utilizó para investigar formatos y controles de FL Studio; la síntesis y el procesamiento son implementaciones propias.
+DAW de escritorio para Windows con cinco instrumentos VST3 propios, biblioteca de plugins instalados, patrones con varios instrumentos, Playlist independiente y herramientas de edición musical. Conserva el motor C++ propio, ASIO/WASAPI, grabación, entrada MIDI y efectos VST3. REA se utilizó para investigar formatos y controles de FL Studio; la síntesis y el procesamiento son implementaciones propias.
 
-La versión 0.7 añade **ecualizador de tres bandas y compresor por canal y bus**, con presets propios, bypass independiente y medidor de reducción real. Abre **F10 → EQ y compresor** o usa el acceso del mezclador. Los efectos se guardan con el proyecto y se incluyen en el WAV. [Funcionamiento y pruebas](docs/channel-effects.md).
+La versión 0.8 añade **StudioWav Triple, FM y Pluck**, y amplía los bancos de Piano y Kick: cinco VST3 con **40 presets originales**. Elige un preset en F8 antes de añadirlo o cámbialo desde el panel del plugin. Los primeros cuatro presets de Piano y Kick conservan sus valores anteriores. [Instrumentos, presets y alcance](docs/instruments.md).
+
+Incluye **ecualizador de tres bandas y compresor por canal y bus**, con presets propios, bypass independiente y medidor de reducción real. Abre **F10 → EQ y compresor** o usa el acceso del mezclador. Los efectos se guardan con el proyecto y se incluyen en el WAV. [Funcionamiento y pruebas](docs/channel-effects.md).
 
 También puedes **importar y exportar archivos MIDI**: selección de partes, notas editables, percusión GM por voz, pedal sustain convertido a duración y exportación del patrón o la canción. Abre **Archivo → Importar MIDI…** o arrastra un `.mid` al editor. [Compatibilidad, límites y pruebas](docs/midi.md).
 
 ## Abrir
 
-Descarga el portable para Windows x64 desde [GitHub Releases](https://github.com/Lumarri/StudioWav/releases). Incluye el motor y los dos instrumentos VST3 propios; no requiere instalar Node.js, Python ni herramientas de compilación. El ejecutable no está firmado. Si compilas el proyecto, **Abrir StudioWav.cmd** inicia la distribución local de la versión 0.7.0.
+Descarga el portable para Windows x64 desde [GitHub Releases](https://github.com/Lumarri/StudioWav/releases). Incluye el motor y los cinco instrumentos VST3 propios; no requiere instalar Node.js, Python ni herramientas de compilación. El ejecutable no está firmado. Si compilas el proyecto, **Abrir StudioWav.cmd** inicia la distribución local de la versión 0.8.0.
 
-Pulsa **F8** y elige **StudioWav Piano** o **StudioWav Kick** para añadirlo al rack. Usa el botón de escucha del canal para probarlo. En **F10 → Efectos VST3 → Abrir** están el editor y sus cuatro presets. En ese panel también puedes ajustar parámetros o cargar efectos instalados. F8 permite buscar otros instrumentos VST3 sin mover sus archivos.
+Pulsa **F8** y elige **Piano, Kick, Triple, FM o Pluck**, selecciona uno de sus ocho presets y añádelo al rack. Usa el botón de escucha del canal para probarlo. En **F10 → Efectos VST3 → Abrir** está el editor nativo; el panel también permite seleccionar presets, ajustar parámetros o cargar efectos instalados. F8 permite buscar otros instrumentos VST3 sin mover sus archivos. El ZIP independiente de instrumentos de Releases permite llevar los cinco VST3 a otros hosts compatibles.
 
 Abre [examples/Piano y kicks.studiowav](<examples/Piano y kicks.studiowav>) con **Abrir proyecto** para escuchar un arreglo listo de ocho compases. El ejemplo también se incluye en `resources/examples` de la distribución extraída.
 
 También se incluye [Piano y kicks.mid](<examples/Piano y kicks.mid>) para probar el intercambio de notas con otros programas.
 
 [Mezcla con efectos.studiowav](<examples/Mezcla con efectos.studiowav>) permite escuchar los nuevos procesadores con Piano y Kick.
+
+Abre [Cinco instrumentos.studiowav](<examples/Cinco instrumentos.studiowav>) para escuchar los cinco VST3: una presentación de cada sonido y una sección con todos juntos.
 
 **FL Keys y Fruit Kick no se pueden trasladar como VST3:** REA confirmó que las DLL instaladas usan la interfaz nativa de FL Studio. Los instrumentos incluidos son propios. La biblioteca busca los VST3 instalados en tu equipo y conserva su catálogo; se cargan desde sus rutas originales y no se redistribuyen. [Origen del código y método de investigación](docs/research-method.md).
 
@@ -159,3 +163,5 @@ Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para colaborar. Puedes reportar erro
 ![StudioWav: instrumentos y controles de sonido](docs/images/studiowav.png)
 
 ![Ecualizador y compresor con medidor nativo](docs/images/effects.png)
+
+![Cinco instrumentos VST3 con sus bancos de presets](docs/images/instruments.png)

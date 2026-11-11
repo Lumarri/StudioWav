@@ -4,13 +4,14 @@ import type { AudioEngine, FoundPlugin } from "./audio/desktop-engine.ts";
 
 type Props = {
   engine: AudioEngine;
-  onAdd: (plugin: FoundPlugin) => Promise<void>;
+  onAdd: (plugin: FoundPlugin, program?: number) => Promise<void>;
   notify: (message: string) => void;
 };
 export function InstrumentLibrary({ engine, onAdd, notify }: Props) {
   const [plugins, setPlugins] = useState<FoundPlugin[]>([]);
   const [busy, setBusy] = useState(true);
   const [search, setSearch] = useState("");
+  const [programs, setPrograms] = useState<Record<string, number>>({});
   useEffect(() => {
     let active = true;
     Promise.allSettled([
@@ -56,7 +57,7 @@ export function InstrumentLibrary({ engine, onAdd, notify }: Props) {
   return (
     <section className="instrument-library" aria-label="Biblioteca VST3">
       <h3>Instrumentos VST3</h3>
-      <p>Piano y kick incluidos · presets y controles en Abrir plugin.</p>
+      <p>Piano, Kick, Triple, FM y Pluck · 40 presets originales incluidos.</p>
       <div className="library-search">
         <Search size={14} />
         <input
@@ -93,25 +94,50 @@ export function InstrumentLibrary({ engine, onAdd, notify }: Props) {
               .includes(search.toLowerCase()),
           )
           .map((p) => (
-            <button
-              key={p.description}
-              disabled={busy}
-              aria-label={`Añadir ${p.name}`}
-              onClick={() => void task(() => onAdd(p))}
-            >
-              {p.bundledId === "kick" ? (
-                <AudioLines size={21} />
-              ) : (
-                <Piano size={21} />
+            <div className="library-instrument" key={p.description}>
+              <button
+                disabled={busy}
+                aria-label={`Añadir ${p.name}`}
+                onClick={() => void task(() => onAdd(p, programs[p.name] ?? 0))}
+              >
+                {p.bundledId === "kick" ? (
+                  <AudioLines size={21} />
+                ) : (
+                  <Piano size={21} />
+                )}
+                <div>
+                  <strong>{p.name}</strong>
+                  <small>
+                    {p.bundledId
+                      ? `${p.category} · ${p.presetNames?.length ?? 0} presets`
+                      : p.manufacturer}
+                  </small>
+                </div>
+                <Plus size={16} />
+              </button>
+              {p.presetNames && (
+                <label className="library-preset">
+                  Preset
+                  <select
+                    aria-label={`Preset de ${p.name}`}
+                    disabled={busy}
+                    value={programs[p.name] ?? 0}
+                    onChange={(e) =>
+                      setPrograms((previous) => ({
+                        ...previous,
+                        [p.name]: Number(e.target.value),
+                      }))
+                    }
+                  >
+                    {p.presetNames.map((name, index) => (
+                      <option key={name} value={index}>
+                        {name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
               )}
-              <div>
-                <strong>{p.name}</strong>
-                <small>
-                  {p.bundledId ? "Incluido · 4 presets" : p.manufacturer}
-                </small>
-              </div>
-              <Plus size={16} />
-            </button>
+            </div>
           ))}
       </div>
       {busy && <p role="status">Preparando instrumentos…</p>}

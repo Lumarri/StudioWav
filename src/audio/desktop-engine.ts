@@ -39,7 +39,9 @@ export type DeviceList = {
   midiDevice: string;
 };
 export type FoundPlugin = {
-  bundledId?: "piano" | "kick";
+  bundledId?: "piano" | "kick" | "triple" | "fm" | "pluck";
+  presetNames?: string[];
+  category?: string;
   name: string;
   manufacturer: string;
   instrument: boolean;

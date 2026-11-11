@@ -641,12 +641,40 @@ function App() {
     notify(`${t.name} añadido al proyecto.`);
   }
 
-  async function addVstInstrument(plugin: FoundPlugin) {
+  async function addVstInstrument(plugin: FoundPlugin, program = 0) {
     stop();
     const snapshot = projectRef.current;
-    const next = structuredClone(await engine.capture(snapshot));
+    const captured = await engine.capture(snapshot);
+    let next = structuredClone(captured);
     const added = addPluginTrack(next, plugin);
-    await engine.update(next, modeRef.current, patternRef.current);
+    try {
+      await engine.update(next, modeRef.current, patternRef.current);
+      if (program > 0 && plugin.presetNames && plugin.presetNames.length > 1) {
+        const args = { trackId: added.id, pluginId: added.plugins![0].id };
+        const parameters = await engine.request<
+          { name: string; index: number }[]
+        >("parameters", args);
+        const preset = parameters.find((p) => p.name === "Program");
+        if (!preset) throw new Error("El instrumento no expone sus presets.");
+        await engine.request("parameter", {
+          ...args,
+          index: preset.index,
+          value: program / (plugin.presetNames.length - 1),
+        });
+        next = await engine.capture(next);
+        await engine.update(next, modeRef.current, patternRef.current);
+      }
+    } catch (error) {
+      await engine
+        .update(
+          projectRef.current === snapshot ? captured : projectRef.current,
+          modeRef.current,
+          patternRef.current,
+          true,
+        )
+        .catch(() => {});
+      throw error;
+    }
     if (projectRef.current !== snapshot) {
       await engine.update(
         projectRef.current,

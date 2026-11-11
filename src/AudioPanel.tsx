@@ -173,6 +173,11 @@ export function AudioPanel({
   const selectedType = devices?.types.find((t) => t.name === settings.type);
   const points = track.automation?.[target] ?? [];
   const [min, max, increment] = ranges[target];
+  const adjustedSlot = track.plugins?.find((p) => p.id === parameterPlugin);
+  const presetNames = plugins.find(
+    (p) => p.bundledId && p.name === adjustedSlot?.name,
+  )?.presetNames;
+  const programParameter = parameters.find((p) => p.name === "Program");
   return (
     <div className="modal-backdrop audio-backdrop" onClick={onClose}>
       <section
@@ -790,9 +795,11 @@ export function AudioPanel({
                   Parámetros del plugin
                   <select
                     aria-label="Plugin para ajustar parámetros"
+                    disabled={busy}
                     value={parameterPlugin}
                     onChange={(e) => {
                       setParameterPlugin(e.target.value);
+                      setParameters([]);
                       if (e.target.value)
                         void task(async () =>
                           setParameters(
@@ -816,9 +823,50 @@ export function AudioPanel({
               )}
               {parameters.length > 0 && (
                 <div className="plugin-parameters">
+                  {presetNames && programParameter && (
+                    <label className="plugin-preset-select">
+                      Preset del instrumento
+                      <select
+                        aria-label="Preset del instrumento"
+                        disabled={busy}
+                        value={Math.round(
+                          programParameter.value * (presetNames.length - 1),
+                        )}
+                        onChange={(e) => {
+                          const index = Number(e.target.value);
+                          void task(async () => {
+                            await engine.request("parameter", {
+                              trackId: track.id,
+                              pluginId: parameterPlugin,
+                              index: programParameter.index,
+                              value: index / (presetNames.length - 1),
+                            });
+                        const captured = await engine.capture(project);
+                        await engine.update(captured, mode, patternId);
+                        onChange(captured);
+                            setParameters(
+                              await engine.request("parameters", {
+                                trackId: track.id,
+                                pluginId: parameterPlugin,
+                              }),
+                            );
+                            notify(`Preset: ${presetNames[index]}`);
+                          });
+                        }}
+                      >
+                        {presetNames.map((name, index) => (
+                          <option key={name} value={index}>
+                            {name}
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                  )}
                   {parameters
                     .filter(
-                      (parameter) => !/^MIDI CC \d+\|\d+$/.test(parameter.name),
+                      (parameter) =>
+                        !/^MIDI CC \d+\|\d+$/.test(parameter.name) &&
+                        !(parameter.name === "Program" && presetNames),
                     )
                     .map((parameter) => (
                       <label key={parameter.index}>
@@ -830,6 +878,7 @@ export function AudioPanel({
                         </span>
                         <input
                           aria-label={`Parámetro ${parameter.name}`}
+                          disabled={busy}
                           type="range"
                           min="0"
                           max="1"
