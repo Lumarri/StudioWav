@@ -1,6 +1,6 @@
 {
   "name": "studiowav",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "license": "AGPL-3.0-only",
   "repository": {
@@ -23,7 +23,7 @@
     "desktop": "node scripts/desktop.mjs",
     "start": "electron .",
     "build": "tsc --noEmit && vite build",
-    "test": "node --test tests/project.test.ts tests/native-lifecycle.test.cjs tests/music-tools.test.ts tests/plugins.test.ts tests/plugin-library.test.cjs",
+    "test": "node --test tests/project.test.ts tests/native-lifecycle.test.cjs tests/music-tools.test.ts tests/plugins.test.ts tests/plugin-library.test.cjs tests/midi.test.ts",
     "test:e2e": "playwright test",
     "native:setup": "python scripts/setup-native-tools.py",
     "native:build": "node scripts/build-native.mjs",
@@ -50,7 +50,7 @@
     "appId": "dev.studiowav.app",
     "productName": "StudioWav",
     "directories": {
-      "output": "release/0.5.0"
+      "output": "release/0.6.0"
     },
     "files": [
       "dist/**/*",

@@ -7,8 +7,9 @@ import { setTimeout as sleep } from "node:timers/promises";
 import os from "node:os";
 import path from "node:path";
 
+const { version } = JSON.parse(await readFile("package.json", "utf8"));
 const executable = path.resolve(
-  process.argv[2] ?? "release/0.5.0/StudioWav-0.5.0-portable.exe",
+  process.argv[2] ?? `release/${version}/StudioWav-${version}-portable.exe`,
 );
 const profile = await mkdtemp(
   path.join(os.tmpdir(), "studiowav-test-portable-"),
@@ -76,12 +77,26 @@ try {
   const auditioned = [];
   for (const name of ["StudioWav Piano", "StudioWav Kick"]) {
     await page.keyboard.press("F8");
-    await page.getByRole("button", { name: `Añadir ${name}`, exact: true }).click();
-    await expect(page.getByRole("dialog", { name: "Añadir instrumento", exact: true })).toHaveCount(0);
-    await page.getByRole("tab", { name: "Secuenciador F6", exact: true }).click();
-    await page.getByRole("button", { name: `Escuchar ${name}`, exact: true }).click();
-    await expect.poll(async () => (await page.evaluate(() => window.studioNative.request("status"))).levels.master ?? 0,
-      { timeout: 10000, intervals: [25] }).toBeGreaterThan(.01);
+    await page
+      .getByRole("button", { name: `Añadir ${name}`, exact: true })
+      .click();
+    await expect(
+      page.getByRole("dialog", { name: "Añadir instrumento", exact: true }),
+    ).toHaveCount(0);
+    await page
+      .getByRole("tab", { name: "Secuenciador F6", exact: true })
+      .click();
+    await page
+      .getByRole("button", { name: `Escuchar ${name}`, exact: true })
+      .click();
+    await expect
+      .poll(
+        async () =>
+          (await page.evaluate(() => window.studioNative.request("status")))
+            .levels.master ?? 0,
+        { timeout: 10000, intervals: [25] },
+      )
+      .toBeGreaterThan(0.01);
     auditioned.push(name);
   }
   await mkdir("test-results", { recursive: true });

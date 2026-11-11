@@ -28,6 +28,8 @@ export type PluginSlot = {
   bypassed: boolean;
 };
 export type Track = {
+  midiProgram?: number;
+  midiDrumNote?: number;
   id: string;
   name: string;
   instrument: Instrument;
@@ -467,6 +469,14 @@ export function validateProject(value: unknown): Project {
       !finite(t.send, 0, 0.6) ||
       typeof t.muted !== "boolean" ||
       typeof t.solo !== "boolean" ||
+      (t.midiProgram !== undefined &&
+        (!Number.isInteger(t.midiProgram) ||
+          t.midiProgram < 0 ||
+          t.midiProgram > 127)) ||
+      (t.midiDrumNote !== undefined &&
+        (!Number.isInteger(t.midiDrumNote) ||
+          t.midiDrumNote < 0 ||
+          t.midiDrumNote > 127)) ||
       (t.instrument === "sample" &&
         !p.samples.some((sample) => sample.id === t.sampleId))
     )

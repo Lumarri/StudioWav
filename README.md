@@ -1,14 +1,18 @@
-# StudioWav 0.5
+# StudioWav 0.6
 
 DAW de escritorio para Windows con piano y kick VST3 propios, biblioteca de plugins instalados, patrones con varios instrumentos, Playlist independiente y herramientas de edición musical. Conserva el motor C++ propio, ASIO/WASAPI, grabación, entrada MIDI y efectos VST3. REA se utilizó para investigar formatos y controles de FL Studio; la síntesis y el procesamiento son implementaciones propias.
 
+La versión 0.6 añade **importación y exportación de archivos MIDI**: selección de partes, notas editables, percusión GM por voz, pedal sustain convertido a duración y exportación del patrón o la canción. Abre **Archivo → Importar MIDI…** o arrastra un `.mid` al editor. [Compatibilidad, límites y pruebas](docs/midi.md).
+
 ## Abrir
 
-Descarga el portable para Windows x64 desde [GitHub Releases](https://github.com/Lumarri/StudioWav/releases). Incluye el motor y los dos instrumentos VST3 propios; no requiere instalar Node.js, Python ni herramientas de compilación. El ejecutable no está firmado. Si compilas el proyecto, **Abrir StudioWav.cmd** inicia la distribución local de la versión 0.5.0.
+Descarga el portable para Windows x64 desde [GitHub Releases](https://github.com/Lumarri/StudioWav/releases). Incluye el motor y los dos instrumentos VST3 propios; no requiere instalar Node.js, Python ni herramientas de compilación. El ejecutable no está firmado. Si compilas el proyecto, **Abrir StudioWav.cmd** inicia la distribución local de la versión 0.6.0.
 
 Pulsa **F8** y elige **StudioWav Piano** o **StudioWav Kick** para añadirlo al rack. Usa el botón de escucha del canal para probarlo. En **F10 → Efectos VST3 → Abrir** están el editor y sus cuatro presets. En ese panel también puedes ajustar parámetros o cargar efectos instalados. F8 permite buscar otros instrumentos VST3 sin mover sus archivos.
 
 Abre [examples/Piano y kicks.studiowav](<examples/Piano y kicks.studiowav>) con **Abrir proyecto** para escuchar un arreglo listo de ocho compases. El ejemplo también se incluye en `resources/examples` de la distribución extraída.
+
+También se incluye [Piano y kicks.mid](<examples/Piano y kicks.mid>) para probar el intercambio de notas con otros programas.
 
 **FL Keys y Fruit Kick no se pueden trasladar como VST3:** REA confirmó que las DLL instaladas usan la interfaz nativa de FL Studio. Los instrumentos incluidos son propios. La biblioteca busca los VST3 instalados en tu equipo y conserva su catálogo; se cargan desde sus rutas originales y no se redistribuyen. [Origen del código y método de investigación](docs/research-method.md).
 
@@ -119,6 +123,8 @@ Para generar el portable: **npm.cmd run dist**. Para la interfaz de compatibilid
     node scripts/verify-musical-engine.mjs
     node scripts/verify-instruments.mjs
     node scripts/verify-plugin-desktop.mjs
+    node scripts/verify-midi.mjs
+    node scripts/verify-midi-desktop.mjs
 
 La suite nativa usa un VST3 de prueba compilado con el proyecto y WAV reales. Electron se verifica con un perfil temporal aislado. Los resultados quedan en test-results/.
 

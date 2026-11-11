@@ -56,6 +56,9 @@ import {
 import type { NoteTool } from "./music-tools.ts";
 import { AudioPanel } from "./AudioPanel.tsx";
 import { InstrumentLibrary } from "./InstrumentLibrary.tsx";
+import { MidiImportPanel } from "./MidiImportPanel.tsx";
+import { readMidi, writeMidi, importMidi, MIDI_MAX_BYTES } from "./midi.ts";
+import type { MidiSong, MidiImportOptions } from "./midi.ts";
 import { addPluginTrack } from "./plugins.ts";
 import type { FoundPlugin } from "./audio/desktop-engine.ts";
 import { dataUrlBytes } from "./audio/data.ts";
@@ -233,6 +236,11 @@ function App() {
   const messageTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const openInput = useRef<HTMLInputElement>(null);
   const audioInput = useRef<HTMLInputElement>(null);
+  const midiInput = useRef<HTMLInputElement>(null);
+  const [pendingMidi, setPendingMidi] = useState<{
+    song: MidiSong;
+    name: string;
+  } | null>(null);
   const pianoScroll = useRef<HTMLDivElement>(null);
   const pianoDrag = useRef<{
     id: string;
@@ -462,6 +470,78 @@ function App() {
         error instanceof Error
           ? error.message
           : "No se pudo abrir el proyecto.",
+      );
+    }
+  }
+
+  async function loadMidi(file?: File) {
+    if (!file) return;
+    try {
+      if (file.size > MIDI_MAX_BYTES)
+        throw new Error("El archivo MIDI supera 8 MB.");
+      const song = readMidi(new Uint8Array(await file.arrayBuffer()));
+      stop();
+      setModal(null);
+      setPendingMidi({
+        song,
+        name: file.name.replace(/\.(mid|midi)$/i, "").slice(0, 60) || "MIDI",
+      });
+    } catch (error) {
+      notify(
+        error instanceof Error ? error.message : "No se pudo leer el MIDI.",
+      );
+    }
+  }
+
+  async function acceptMidi(options: MidiImportOptions) {
+    if (!pendingMidi) throw new Error("No hay un archivo MIDI seleccionado.");
+    stop();
+    const snapshot = projectRef.current;
+    const captured = options.replace
+      ? snapshot
+      : await engine.capture(snapshot);
+    const result = importMidi(
+      captured,
+      pendingMidi.song,
+      options,
+      pendingMidi.name,
+    );
+    if (engine.native)
+      await engine.update(result.project, "song", result.patternId, true);
+    else await engine.prepare(result.project);
+    if (projectRef.current !== snapshot) {
+      if (engine.native)
+        await engine.update(
+          projectRef.current,
+          modeRef.current,
+          patternRef.current,
+        );
+      throw new Error("El proyecto cambió. Repite la importación.");
+    }
+    commit(() => result.project);
+    setPatternId(result.patternId);
+    setActiveTrackId(result.trackId);
+    setMode("song");
+    setPendingMidi(null);
+    setSelectedNoteId(null);
+    showWindow("playlist");
+    notify(`MIDI importado: ${pendingMidi.name}. ${result.warnings.join(" ")}`);
+    return result.warnings;
+  }
+
+  function exportMidi(scope: Mode) {
+    try {
+      const result = writeMidi(projectRef.current, scope, patternRef.current);
+      download(
+        new Blob([new Uint8Array(result.bytes)], { type: "audio/midi" }),
+        `${projectRef.current.name || "StudioWav"}${scope === "pattern" ? ` - ${pattern.name}` : ""}.mid`,
+      );
+      notify(
+        `MIDI exportado: ${result.notes} notas en ${result.tracks} canales. ${result.warnings.join(" ")}`,
+      );
+    } catch (error) {
+      notify(
+        error instanceof Error ? error.message : "No se pudo exportar MIDI.",
       );
     }
   }
@@ -781,12 +861,7 @@ function App() {
   }
 
   function beginNote(event: ReactPointerEvent<HTMLDivElement>, pitch: number) {
-    if (
-      event.button !== 0 ||
-      !isMelodic(track.instrument) ||
-      track.kind === "bus"
-    )
-      return;
+    if (event.button !== 0 || track.kind === "bus") return;
     const start = clamp(
       (event.clientX - event.currentTarget.getBoundingClientRect().left) /
         (PIANO_WIDTH / pattern.length),
@@ -1097,7 +1172,11 @@ function App() {
       if (windowKey[event.code]) {
         event.preventDefault();
         if (!event.repeat) {
-          if (event.code === "F7" && !isMelodic(track.instrument))
+          if (
+            event.code === "F7" &&
+            !isMelodic(track.instrument) &&
+            !channel.notes.length
+          )
             selectTrack(
               project.tracks.find((t) => isMelodic(t.instrument)) ?? track,
             );
@@ -1544,7 +1623,13 @@ function App() {
       onDrop={(event) => {
         if (event.dataTransfer.files.length) {
           event.preventDefault();
-          void importAudio([...event.dataTransfer.files]);
+          const files = [...event.dataTransfer.files];
+          const midi = files.find((file) => /\.(mid|midi)$/i.test(file.name));
+          if (midi) {
+            if (files.length !== 1)
+              notify("Arrastra un solo archivo MIDI para elegir sus partes.");
+            else void loadMidi(midi);
+          } else void importAudio(files);
         }
       }}
     >
@@ -1577,6 +1662,18 @@ function App() {
                 {
                   label: "Importar audio…",
                   action: () => audioInput.current?.click(),
+                },
+                {
+                  label: "Importar MIDI…",
+                  action: () => midiInput.current?.click(),
+                },
+                {
+                  label: "Exportar patrón MIDI…",
+                  action: () => exportMidi("pattern"),
+                },
+                {
+                  label: "Exportar canción MIDI…",
+                  action: () => exportMidi("song"),
                 },
                 {
                   label: "Exportar WAV…",
@@ -1994,7 +2091,7 @@ function App() {
             role="tab"
             aria-selected={windowOrder.at(-1) === "piano" && windows.piano}
             onClick={() => {
-              if (!isMelodic(track.instrument))
+              if (!isMelodic(track.instrument) && !channel.notes.length)
                 selectTrack(
                   project.tracks.find((t) => isMelodic(t.instrument)) ?? track,
                 );
@@ -2630,7 +2727,8 @@ function App() {
                           {t.name}
                         </button>
                       </div>
-                      {isMelodic(t.instrument) ? (
+                      {isMelodic(t.instrument) ||
+                      pattern.channels[t.id].notes.length > 0 ? (
                         <button
                           className={`rack-melody ${playing ? "running" : ""}`}
                           onClick={() => selectTrack(t, true)}
@@ -2703,7 +2801,7 @@ function App() {
               {editorToolbar("piano")}
 
               <div className="piano-editor">
-                {isMelodic(track.instrument) && track.kind !== "bus" ? (
+                {track.kind !== "bus" ? (
                   <>
                     <div className="piano-note-heading">
                       <span style={{ color: track.color }}>
@@ -3472,6 +3570,25 @@ function App() {
           event.target.value = "";
         }}
       />
+      <input
+        hidden
+        ref={midiInput}
+        type="file"
+        accept=".mid,.midi,audio/midi,audio/x-midi"
+        onChange={(event) => {
+          void loadMidi(event.target.files?.[0]);
+          event.target.value = "";
+        }}
+      />
+      {pendingMidi && (
+        <MidiImportPanel
+          song={pendingMidi.song}
+          fileName={pendingMidi.name}
+          project={project}
+          onClose={() => setPendingMidi(null)}
+          onImport={acceptMidi}
+        />
+      )}
       {modal === "notes" && (
         <NoteToolsPanel
           tool={noteTool}
