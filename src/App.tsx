@@ -185,7 +185,7 @@ function App() {
   const [ghostNotes, setGhostNotes] = useState(true);
   const [playlistSnap, setPlaylistSnap] = useState(1);
   const [audioTab, setAudioTab] = useState<
-    "devices" | "routing" | "plugins" | "automation" | "sample"
+    "devices" | "routing" | "plugins" | "effects" | "automation" | "sample"
   >("devices");
   const [context, setContext] = useState<{
     x: number;
@@ -3168,6 +3168,10 @@ function App() {
                   track={track}
                   project={project}
                   engine={engine}
+                  onEffects={() => {
+                    setAudioTab("effects");
+                    setModal("audio");
+                  }}
                   onPlugins={() => {
                     setAudioTab("plugins");
                     setModal("audio");

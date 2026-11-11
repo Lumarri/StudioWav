@@ -8,9 +8,17 @@ import {
 } from "../model.ts";
 import type { Mode, Project, Track } from "../model.ts";
 import { encodeWav } from "./wav.ts";
+import { defaultChannelEffects } from "../channel-effects.ts";
+import compressorWorkletUrl from "./compressor-worklet.js?url&no-inline";
 
 type Source = AudioScheduledSourceNode;
 type Bus = {
+  effectsIn: GainNode;
+  low: BiquadFilterNode;
+  mid: BiquadFilterNode;
+  high: BiquadFilterNode;
+  compressor: AudioWorkletNode;
+  reduction: { value: number };
   source: GainNode;
   input: BiquadFilterNode;
   gain: GainNode;
@@ -45,7 +53,18 @@ function noiseBuffer(context: BaseAudioContext): AudioBuffer {
   return buffer;
 }
 
-function makeGraph(context: BaseAudioContext, project: Project): Graph {
+const workletModules = new WeakMap<BaseAudioContext, Promise<void>>();
+async function makeGraph(
+  context: BaseAudioContext,
+  project: Project,
+): Promise<Graph> {
+  let module = workletModules.get(context);
+  if (!module) {
+    module = context.audioWorklet.addModule(compressorWorkletUrl);
+    module.catch(() => workletModules.delete(context));
+    workletModules.set(context, module);
+  }
+  await module;
   const plan = mixerPlan(project, context.sampleRate);
   const extra: AudioNode[] = [];
   const routes = new Map<string, GainNode>();
@@ -76,11 +95,37 @@ function makeGraph(context: BaseAudioContext, project: Project): Graph {
   const audible = audibleTracks(project);
   project.tracks.forEach((track) => {
     const input = context.createBiquadFilter();
+    const effectsIn = context.createGain();
+    const low = context.createBiquadFilter(),
+      mid = context.createBiquadFilter(),
+      high = context.createBiquadFilter();
+    low.type = "lowshelf";
+    mid.type = "peaking";
+    high.type = "highshelf";
+    low.frequency.value = 120;
+    high.frequency.value = Math.min(8000, context.sampleRate * 0.45);
+    mid.Q.value = 0.7;
+    const compressor = new AudioWorkletNode(context, "studiowav-compressor", {
+      numberOfInputs: 1,
+      numberOfOutputs: 1,
+      outputChannelCount: [2],
+      channelCount: 2,
+      channelCountMode: "explicit",
+    });
+    const reduction = { value: 0 };
+    compressor.port.onmessage = (e) => {
+      if (Number.isFinite(e.data)) reduction.value = Math.max(0, e.data);
+    };
+    effectsIn.connect(low);
+    low.connect(mid);
+    mid.connect(high);
+    high.connect(compressor);
+    compressor.connect(input);
     const source = context.createGain();
     const local = context.createDelay(8);
     local.delayTime.value = plan.arrival[track.id] / context.sampleRate;
     source.connect(local);
-    local.connect(input);
+    local.connect(effectsIn);
     extra.push(local);
     const manual = context.createDelay(8);
     manual.delayTime.value = (track.delaySamples ?? 0) / context.sampleRate;
@@ -104,12 +149,28 @@ function makeGraph(context: BaseAudioContext, project: Project): Graph {
     pan.connect(meter);
     pan.connect(send);
     send.connect(delay);
-    buses.set(track.id, { source, input, gain, gate, pan, send, meter });
+    const bus = {
+      source,
+      input,
+      gain,
+      gate,
+      pan,
+      send,
+      meter,
+      effectsIn,
+      low,
+      mid,
+      high,
+      compressor,
+      reduction,
+    };
+    syncEffects(bus, track, 0, true);
+    buses.set(track.id, bus);
   });
   for (const edge of plan.edges) {
     const source = buses.get(edge.from)!;
     const destination =
-      edge.to === "master" ? master : buses.get(edge.to)!.input;
+      edge.to === "master" ? master : buses.get(edge.to)!.effectsIn;
     const compensation = context.createDelay(8);
     compensation.delayTime.value = edge.compensation / context.sampleRate;
     const gain = context.createGain();
@@ -124,9 +185,12 @@ function makeGraph(context: BaseAudioContext, project: Project): Graph {
     [master, limiter, meter, delay, feedback, returnGain].forEach((node) =>
       node.disconnect(),
     );
-    buses.forEach((bus) =>
-      Object.values(bus).forEach((node) => node.disconnect()),
-    );
+    buses.forEach((bus) => {
+      bus.compressor.port.close();
+      Object.values(bus).forEach((node) => {
+        if ("disconnect" in node) node.disconnect();
+      });
+    });
     extra.forEach((node) => node.disconnect());
   };
   return {
@@ -148,6 +212,29 @@ const routingSignature = (project: Project) =>
       delay: t.delaySamples,
     })),
   );
+function syncEffects(bus: Bus, track: Track, at: number, instant = false) {
+  const { eq, compressor: comp } = track.effects ?? defaultChannelEffects();
+  const set = (parameter: AudioParam, value: number) => {
+    if (instant) parameter.value = value;
+    else parameter.setTargetAtTime(value, at, 0.01);
+  };
+  set(bus.low.gain, eq.enabled ? eq.low : 0);
+  set(bus.mid.gain, eq.enabled ? eq.mid : 0);
+  set(bus.mid.frequency, Math.min(eq.midHz, bus.mid.context.sampleRate * 0.45));
+  set(bus.high.gain, eq.enabled ? eq.high : 0);
+  // Toggle bypass at block boundaries; continuous parameters have a short ramp.
+  bus.compressor.parameters
+    .get("enabled")!
+    .setValueAtTime(comp.enabled ? 1 : 0, at);
+  for (const name of [
+    "threshold",
+    "ratio",
+    "attack",
+    "release",
+    "makeup",
+  ] as const)
+    set(bus.compressor.parameters.get(name)!, comp[name]);
+}
 function automate(
   graph: Graph,
   project: Project,
@@ -327,13 +414,20 @@ export class AudioEngine {
   private nextTime = 0;
   private position = 0;
   private run = 0;
+  private preparation: Promise<void> = Promise.resolve();
   private getProject: (() => Project) | null = null;
   private getMode: (() => Mode) | null = null;
   private getPattern: (() => string) | null = null;
   onStep: (step: number) => void = () => {};
   onError: (error: unknown) => void = () => {};
 
-  async prepare(project: Project) {
+  prepare(project: Project): Promise<void> {
+    const result = this.preparation.then(() => this.prepareGraph(project));
+    this.preparation = result.catch(() => {});
+    return result;
+  }
+
+  private async prepareGraph(project: Project) {
     const retained = new Set(project.samples.map((sample) => sample.id));
     for (const key of this.buffers.keys())
       if (!retained.has(key)) {
@@ -367,7 +461,7 @@ export class AudioEngine {
       project.tracks.some((track) => !this.graph!.buses.has(track.id))
     ) {
       this.graph?.dispose();
-      this.graph = makeGraph(this.context, project);
+      this.graph = await makeGraph(this.context, project);
     }
     this.sync(project);
   }
@@ -381,6 +475,7 @@ export class AudioEngine {
     for (const track of project.tracks) {
       const bus = this.graph.buses.get(track.id);
       if (!bus) continue;
+      syncEffects(bus, track, at);
       bus.gate.gain.setTargetAtTime(audible.has(track.id) ? 1 : 0, at, 0.008);
       const params = {
         gain: bus.gain.gain,
@@ -500,6 +595,10 @@ export class AudioEngine {
       }
     });
     this.sources.clear();
+    this.graph?.buses.forEach((bus) => {
+      bus.compressor.port.postMessage("reset");
+      bus.reduction.value = 0;
+    });
     this.position = 0;
     this.onStep(0);
   }
@@ -537,6 +636,10 @@ export class AudioEngine {
   getPosition() {
     return this.position;
   }
+  compressionReduction(trackId: string) {
+    const bus = this.graph?.buses.get(trackId);
+    return bus?.reduction.value ?? 0;
+  }
   levels(): Record<string, number> {
     if (!this.graph) return {};
     const read = (analyser: AnalyserNode) => {
@@ -573,7 +676,7 @@ export class AudioEngine {
       Math.ceil(seconds * 44100) + compensation,
       44100,
     );
-    const graph = makeGraph(context, project);
+    const graph = await makeGraph(context, project);
     const noise = noiseBuffer(context);
     for (let step = 0; step < length; step++) {
       automate(
@@ -598,6 +701,7 @@ export class AudioEngine {
       }
     }
     const result = await context.startRendering();
+    graph.dispose();
     return new Blob(
       [
         encodeWav(

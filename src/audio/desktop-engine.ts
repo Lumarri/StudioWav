@@ -14,6 +14,7 @@ export type NativeStatus = {
   outputLatency: number;
   pdcSamples: number;
   trackLatencies: Record<string, number>;
+  gainReduction: Record<string, number>;
   cpu: number;
   overruns: number;
   inputLevel: number;
@@ -172,6 +173,11 @@ export class AudioEngine extends WebAudioEngine {
         Math.min(1, v * 1.7),
       ]),
     );
+  }
+  override compressionReduction(trackId: string) {
+    return this.native
+      ? (this.status.gainReduction?.[trackId] ?? 0)
+      : super.compressionReduction(trackId);
   }
   override async export(
     project: Project,

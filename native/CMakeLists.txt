@@ -6,7 +6,7 @@ set(JUCE_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 set(JUCE_BUILD_EXTRAS OFF CACHE BOOL "" FORCE)
 add_subdirectory(vendor/JUCE-8.0.12 JUCE)
 juce_add_console_app(StudioWavAudio PRODUCT_NAME "StudioWavAudio")
-target_sources(StudioWavAudio PRIVATE Main.cpp Engine.cpp Engine.h)
+target_sources(StudioWavAudio PRIVATE Main.cpp Engine.cpp Engine.h ChannelEffects.cpp ChannelEffects.h)
 target_compile_definitions(StudioWavAudio PRIVATE JUCE_WEB_BROWSER=0 JUCE_USE_CURL=0
     JUCE_ASIO=1 JUCE_PLUGINHOST_VST3=1 JUCE_PLUGINHOST_VST=0
     JUCE_DISPLAY_SPLASH_SCREEN=0 JUCE_REPORT_APP_USAGE=0)

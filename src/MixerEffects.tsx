@@ -8,6 +8,7 @@ export function MixerEffects({
   engine,
   onPlugins,
   onRouting,
+  onEffects,
   onBypass,
   notify,
 }: {
@@ -16,6 +17,7 @@ export function MixerEffects({
   engine: AudioEngine;
   onPlugins: () => void;
   onRouting: () => void;
+  onEffects: () => void;
   onBypass: (index: number) => void;
   notify: (message: string) => void;
 }) {
@@ -90,6 +92,18 @@ export function MixerEffects({
           />
         </svg>
       </div>
+      <button
+        className="mixer-route"
+        onClick={onEffects}
+        aria-label="Editar EQ y compresor"
+      >
+        <Activity size={12} /> EQ y compresor
+        <span>
+          {track.effects?.eq.enabled || track.effects?.compressor.enabled
+            ? "Activo"
+            : "Bypass"}
+        </span>
+      </button>
       <button className="mixer-route" onClick={onRouting}>
         Rutas, envíos y compensación →
       </button>

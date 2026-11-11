@@ -1,18 +1,22 @@
-# StudioWav 0.6
+# StudioWav 0.7
 
 DAW de escritorio para Windows con piano y kick VST3 propios, biblioteca de plugins instalados, patrones con varios instrumentos, Playlist independiente y herramientas de edición musical. Conserva el motor C++ propio, ASIO/WASAPI, grabación, entrada MIDI y efectos VST3. REA se utilizó para investigar formatos y controles de FL Studio; la síntesis y el procesamiento son implementaciones propias.
 
-La versión 0.6 añade **importación y exportación de archivos MIDI**: selección de partes, notas editables, percusión GM por voz, pedal sustain convertido a duración y exportación del patrón o la canción. Abre **Archivo → Importar MIDI…** o arrastra un `.mid` al editor. [Compatibilidad, límites y pruebas](docs/midi.md).
+La versión 0.7 añade **ecualizador de tres bandas y compresor por canal y bus**, con presets propios, bypass independiente y medidor de reducción real. Abre **F10 → EQ y compresor** o usa el acceso del mezclador. Los efectos se guardan con el proyecto y se incluyen en el WAV. [Funcionamiento y pruebas](docs/channel-effects.md).
+
+También puedes **importar y exportar archivos MIDI**: selección de partes, notas editables, percusión GM por voz, pedal sustain convertido a duración y exportación del patrón o la canción. Abre **Archivo → Importar MIDI…** o arrastra un `.mid` al editor. [Compatibilidad, límites y pruebas](docs/midi.md).
 
 ## Abrir
 
-Descarga el portable para Windows x64 desde [GitHub Releases](https://github.com/Lumarri/StudioWav/releases). Incluye el motor y los dos instrumentos VST3 propios; no requiere instalar Node.js, Python ni herramientas de compilación. El ejecutable no está firmado. Si compilas el proyecto, **Abrir StudioWav.cmd** inicia la distribución local de la versión 0.6.0.
+Descarga el portable para Windows x64 desde [GitHub Releases](https://github.com/Lumarri/StudioWav/releases). Incluye el motor y los dos instrumentos VST3 propios; no requiere instalar Node.js, Python ni herramientas de compilación. El ejecutable no está firmado. Si compilas el proyecto, **Abrir StudioWav.cmd** inicia la distribución local de la versión 0.7.0.
 
 Pulsa **F8** y elige **StudioWav Piano** o **StudioWav Kick** para añadirlo al rack. Usa el botón de escucha del canal para probarlo. En **F10 → Efectos VST3 → Abrir** están el editor y sus cuatro presets. En ese panel también puedes ajustar parámetros o cargar efectos instalados. F8 permite buscar otros instrumentos VST3 sin mover sus archivos.
 
 Abre [examples/Piano y kicks.studiowav](<examples/Piano y kicks.studiowav>) con **Abrir proyecto** para escuchar un arreglo listo de ocho compases. El ejemplo también se incluye en `resources/examples` de la distribución extraída.
 
 También se incluye [Piano y kicks.mid](<examples/Piano y kicks.mid>) para probar el intercambio de notas con otros programas.
+
+[Mezcla con efectos.studiowav](<examples/Mezcla con efectos.studiowav>) permite escuchar los nuevos procesadores con Piano y Kick.
 
 **FL Keys y Fruit Kick no se pueden trasladar como VST3:** REA confirmó que las DLL instaladas usan la interfaz nativa de FL Studio. Los instrumentos incluidos son propios. La biblioteca busca los VST3 instalados en tu equipo y conserva su catálogo; se cargan desde sus rutas originales y no se redistribuyen. [Origen del código y método de investigación](docs/research-method.md).
 
@@ -41,6 +45,7 @@ Pulsa **F10** o el botón con deslizadores junto al nombre del proyecto para con
 - ASIO, WASAPI compartido, exclusivo y de baja latencia, y DirectSound, según los dispositivos instalados.
 - Selección de salida, entrada, frecuencia y búfer; panel del controlador y preferencias persistentes.
 - Volumen, panorama, mute, solo, filtro paso bajo y delay sincronizado.
+- EQ de graves, medios ajustables y agudos; compresor estéreo con umbral, ratio, ataque, liberación, ganancia de salida y medidor. Funcionan en canales y buses, con presets, bypass, deshacer y guardado.
 - Buses, salida por canal y envíos. El ruteo rechaza ciclos de realimentación.
 - Compensación de latencia para las rutas que se suman: retardos de canal y latencia declarada por los VST3, actualizada cuando cambia esa declaración.
 - Hasta ocho VST3 estéreo por canal: búsqueda, carga, bypass, orden, editor nativo, parámetros y estado guardado en el proyecto. Los instrumentos VST3 reciben las notas del canal.
@@ -125,6 +130,8 @@ Para generar el portable: **npm.cmd run dist**. Para la interfaz de compatibilid
     node scripts/verify-plugin-desktop.mjs
     node scripts/verify-midi.mjs
     node scripts/verify-midi-desktop.mjs
+    node scripts/verify-channel-effects.mjs
+    node scripts/verify-effects-desktop.mjs
 
 La suite nativa usa un VST3 de prueba compilado con el proyecto y WAV reales. Electron se verifica con un perfil temporal aislado. Los resultados quedan en test-results/.
 
@@ -150,3 +157,5 @@ El código propio de StudioWav se publica bajo **AGPL-3.0-only**; consulta [LICE
 Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para colaborar. Puedes reportar errores en [Issues](https://github.com/Lumarri/StudioWav/issues).
 
 ![StudioWav: instrumentos y controles de sonido](docs/images/studiowav.png)
+
+![Ecualizador y compresor con medidor nativo](docs/images/effects.png)

@@ -23,10 +23,17 @@ import {
 } from "./model.ts";
 import type { Project, Track, Mode, AutomationTarget } from "./model.ts";
 import { SampleEditor } from "./SampleEditor.tsx";
+import { ChannelEffectsPanel } from "./ChannelEffectsPanel.tsx";
 import { insertPlugin, isPluginInstrument } from "./plugins.ts";
 
 type Props = {
-  initialTab?: "devices" | "routing" | "plugins" | "automation" | "sample";
+  initialTab?:
+    | "devices"
+    | "routing"
+    | "plugins"
+    | "effects"
+    | "automation"
+    | "sample";
   engine: AudioEngine;
   project: Project;
   track: Track;
@@ -64,7 +71,7 @@ export function AudioPanel({
   onRecord,
 }: Props) {
   const [tab, setTab] = useState<
-    "devices" | "routing" | "plugins" | "automation" | "sample"
+    "devices" | "routing" | "plugins" | "effects" | "automation" | "sample"
   >(initialTab);
   const [devices, setDevices] = useState<DeviceList | null>(null);
   const [settings, setSettings] = useState({
@@ -190,6 +197,7 @@ export function AudioPanel({
               ["devices", "Dispositivos", Mic],
               ["routing", "Rutas y buses", GitBranch],
               ["plugins", "Efectos VST3", Plug],
+              ["effects", "EQ y compresor", SlidersHorizontal],
               ["automation", "Automatización", Activity],
               ["sample", "Muestras", SlidersHorizontal],
             ] as const
@@ -1054,6 +1062,17 @@ export function AudioPanel({
                 </button>
               )}
             </>
+          )}
+          {tab === "effects" && (
+            <ChannelEffectsPanel
+              effects={track.effects}
+              reduction={engine.compressionReduction(track.id)}
+              onChange={(effects) =>
+                edit((_p, t) => {
+                  t.effects = effects;
+                })
+              }
+            />
           )}
           {tab === "sample" && (
             <SampleEditor

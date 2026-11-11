@@ -1,3 +1,6 @@
+import { validateChannelEffects } from "./channel-effects.ts";
+import type { ChannelEffects } from "./channel-effects.ts";
+
 export type Instrument =
   | "kick"
   | "snare"
@@ -28,6 +31,7 @@ export type PluginSlot = {
   bypassed: boolean;
 };
 export type Track = {
+  effects?: ChannelEffects;
   midiProgram?: number;
   midiDrumNote?: number;
   id: string;
@@ -590,6 +594,7 @@ export function validateMixer(project: Project) {
   for (const track of project.tracks) {
     if (track.kind !== undefined && !["instrument", "bus"].includes(track.kind))
       throw new Error("Tipo de canal inválido.");
+    if (track.effects !== undefined) validateChannelEffects(track.effects);
     if (track.outputId !== undefined && typeof track.outputId !== "string")
       throw new Error("Salida inválida.");
     if (

@@ -45,6 +45,7 @@ var object(std::initializer_list<std::pair<juce::Identifier, var>> values) {
   return var(o);
 }
 Config::Config(const var &v) {
+  effects = ChannelEffectSettings::read(v["effects"]);
   id = text(v, "id");
   instrument = text(v, "instrument");
   sampleId = text(v, "sampleId");
@@ -385,6 +386,7 @@ void Engine::updateConfig(const var &v) {
   juce::SpinLock::ScopedLockType guard(lock);
   for (size_t i = 0; i < tracks.size(); ++i) {
     tracks[i]->config = std::move(configs[i]);
+    tracks[i]->effects.configure(tracks[i]->config.effects, sampleRate);
     if (samples.count(tracks[i]->config.sampleId))
       tracks[i]->sample = samples[tracks[i]->config.sampleId];
   }
@@ -813,6 +815,7 @@ void Engine::process(float *const *output, int outputs, int n,
     for (auto &p : t.plugins)
       if (!p.bypassed)
         p.instance->processBlock(block, t.midi);
+    t.effects.process(t.buffer, n);
     t.ownDelay.process(t.buffer, n);
     for (int i = 0; i < n; ++i) {
       double step =
@@ -895,6 +898,7 @@ void Engine::reset() {
     t->pendingMidi.addEvent(juce::MidiMessage::allNotesOff(1), 0);
     t->previewRemaining.fill(0);
     t->filterL = t->filterR = t->filterL2 = t->filterR2 = 0;
+    t->effects.reset();
     t->currentGain = t->audible ? t->config.at(0, step, t->config.gain) : 0;
     t->currentPan = t->config.at(1, step, t->config.pan);
     t->localDelay.clear();
@@ -952,10 +956,11 @@ var Engine::status() {
     buildRouting(project);
     playing = false;
   }
-  var meters = object({{"master", masterPeak.load()}}), latencies = object({});
+  var meters = object({{"master", masterPeak.load()}}), latencies = object({}), reductions = object({});
   for (auto &t : tracks) {
     meters.getDynamicObject()->setProperty(t->config.id, t->peak.load());
     latencies.getDynamicObject()->setProperty(t->config.id, t->latency);
+    reductions.getDynamicObject()->setProperty(t->config.id, t->effects.reduction());
   }
   var observations = array();
   int a, n, b, m;
@@ -988,6 +993,7 @@ var Engine::status() {
        {"outputLatency", device ? device->getOutputLatencyInSamples() : 0},
        {"pdcSamples", pdcSamples},
        {"trackLatencies", latencies},
+       {"gainReduction", reductions},
        {"cpu", cpu.load()},
        {"overruns", overruns.load()},
        {"levels", meters},

@@ -2679,3 +2679,22 @@ svg {
 .sample-editor .primary {
   margin-top: 10px;
 }
+.channel-effects-preset { display: flex; align-items: end; gap: 16px; margin-bottom: 20px; }
+.channel-effects-preset label { display: grid; gap: 8px; flex: 1; }
+.channel-effects-preset button { min-height: 35px; }
+.channel-effect-card { border: 1px solid #36414c; background: #202831; border-radius: 8px; padding: 20px; margin-bottom: 18px; }
+.channel-effect-card.enabled { border-color: #679d8c; }
+.channel-effect-card > header { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 0 0 20px; border: 0; }
+.channel-effect-card h3 { margin: 0 0 7px; font-size: 15px; }
+.channel-effect-card header span { font-size: 11px; color: #a3adb8; }
+.channel-effect-card button[aria-pressed="true"] { background: #355b50; color: #c9f3dc; }
+.channel-effect-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 28px; }
+.channel-effect-controls label { display: grid; grid-template-columns: 1fr auto; gap: 10px; color: #c8d0d9; font-size: 11px; }
+.channel-effect-controls input { grid-column: 1 / -1; width: 100%; accent-color: #9cceb5; }
+.channel-effect-controls output { color: #e8b785; font-variant-numeric: tabular-nums; }
+.compressor-reduction { display: flex; align-items: center; gap: 14px; margin: 0 0 22px; font-size: 11px; }
+.compressor-reduction > div { flex: 1; height: 8px; border-radius: 4px; background: #11191f; overflow: hidden; }
+.compressor-reduction i { display: block; height: 100%; background: #e5b37d; transition: width .1s; }
+.compressor-reduction output { min-width: 50px; text-align: right; }
+.audio-tabs { flex-wrap: wrap; }
+@media (max-width: 700px) { .channel-effect-controls { grid-template-columns: 1fr; } }

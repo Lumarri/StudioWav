@@ -1,0 +1,701 @@
+{
+  "version": 1,
+  "name": "Piano y kicks · Mezcla con efectos",
+  "bpm": 112,
+  "swing": 0.05,
+  "master": 0.78,
+  "bars": 8,
+  "tracks": [
+    {
+      "id": "58b5eec2-f3cf-445b-9743-ec0818b963ba",
+      "name": "StudioWav Piano",
+      "instrument": "keys",
+      "color": "#b6a0e4",
+      "gain": 0.85,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0.13,
+      "plugins": [
+        {
+          "id": "409b2021-0f73-4569-b84a-846c66e793be",
+          "name": "StudioWav Piano",
+          "description": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<PLUGIN name=\"StudioWav Piano\" format=\"VST3\" category=\"Instrument|Synth\"\r\n        manufacturer=\"StudioWav\" version=\"0.5.0\" file=\"studiowav-bundled:piano\"\r\n        uniqueId=\"bcf5f942\" isInstrument=\"1\" fileTime=\"1a1b1b47410\" infoUpdateTime=\"1a1b1bbe00c\"\r\n        numInputs=\"0\" numOutputs=\"0\" isShell=\"0\" hasARAExtension=\"0\"\r\n        uid=\"1e8610ec\"/>\r\n",
+          "instrument": true,
+          "bypassed": false
+        }
+      ],
+      "effects": {
+        "eq": {
+          "enabled": false,
+          "low": 0,
+          "mid": 0,
+          "high": 0,
+          "midHz": 1000
+        },
+        "compressor": {
+          "enabled": true,
+          "threshold": -16,
+          "ratio": 2,
+          "attack": 30,
+          "release": 250,
+          "makeup": 1
+        }
+      }
+    },
+    {
+      "id": "8bf735d0-3da2-4813-895b-a42b23d67367",
+      "name": "StudioWav Kick",
+      "instrument": "kick",
+      "color": "#edaa70",
+      "gain": 0.65,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0,
+      "plugins": [
+        {
+          "id": "676fd6d8-59e7-47b9-9c41-307df9b45fbd",
+          "name": "StudioWav Kick",
+          "description": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n\r\n<PLUGIN name=\"StudioWav Kick\" format=\"VST3\" category=\"Instrument|Synth\"\r\n        manufacturer=\"StudioWav\" version=\"0.5.0\" file=\"studiowav-bundled:kick\"\r\n        uniqueId=\"bcf5f43f\" isInstrument=\"1\" fileTime=\"1a1b1b47415\" infoUpdateTime=\"1a1b1bbe00f\"\r\n        numInputs=\"0\" numOutputs=\"0\" isShell=\"0\" hasARAExtension=\"0\"\r\n        uid=\"1e86104e\"/>\r\n",
+          "instrument": true,
+          "bypassed": false
+        }
+      ],
+      "effects": {
+        "eq": {
+          "enabled": true,
+          "low": 2,
+          "mid": -1.5,
+          "high": 2,
+          "midHz": 500
+        },
+        "compressor": {
+          "enabled": true,
+          "threshold": -18,
+          "ratio": 3,
+          "attack": 20,
+          "release": 100,
+          "makeup": 1
+        }
+      }
+    },
+    {
+      "id": "f6326854-338a-4e33-a1ee-6ed219799a1a",
+      "name": "Sub motion",
+      "instrument": "bass",
+      "color": "#8bd3b6",
+      "gain": 0.35,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0
+    },
+    {
+      "id": "0e849457-9124-4471-a7d1-6dda52e432cf",
+      "name": "Closed hat",
+      "instrument": "hat",
+      "color": "#c9b875",
+      "gain": 0.35,
+      "pan": 0,
+      "muted": false,
+      "solo": false,
+      "cutoff": 18000,
+      "send": 0
+    }
+  ],
+  "patterns": [
+    {
+      "id": "7047fadc-b9d0-407f-9ef0-6d57ce543ede",
+      "name": "Piano · acordes",
+      "length": 32,
+      "channels": {
+        "58b5eec2-f3cf-445b-9743-ec0818b963ba": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "833c5e59-64b3-4e9b-a76e-e725801f231f",
+              "pitch": 60,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.67
+            },
+            {
+              "id": "14880dbc-c344-42b9-84d1-327a5b39958e",
+              "pitch": 64,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.6000000000000001
+            },
+            {
+              "id": "7e1e295f-ec39-41ae-a433-2804def69efc",
+              "pitch": 67,
+              "start": 0,
+              "length": 7,
+              "velocity": 0.53
+            },
+            {
+              "id": "9854389b-5978-4a6c-b5e8-5e5d8c734b67",
+              "pitch": 57,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.67
+            },
+            {
+              "id": "f5a84e27-b2c8-45cf-9a20-84dbc0e26d1a",
+              "pitch": 60,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.6000000000000001
+            },
+            {
+              "id": "8c75ab8b-9b61-4780-ae87-bda41dd09707",
+              "pitch": 64,
+              "start": 8,
+              "length": 7,
+              "velocity": 0.53
+            },
+            {
+              "id": "82013fa2-da57-4192-a63f-96f7608ecfb1",
+              "pitch": 65,
+              "start": 16,
+              "length": 7,
+              "velocity": 0.67
+            },
+            {
+              "id": "a0ab9c4c-6749-4a40-9a38-901c8882cc1e",
+              "pitch": 69,
+              "start": 16,
+              "length": 7,
+              "velocity": 0.6000000000000001
+            },
+            {
+              "id": "b9f1a478-69c1-4739-9ffa-e008c3523f78",
+              "pitch": 72,
+              "start": 16,
+              "length": 7,
+              "velocity": 0.53
+            },
+            {
+              "id": "2af1e5a1-8316-4822-971c-21112e9a0d5a",
+              "pitch": 67,
+              "start": 24,
+              "length": 7,
+              "velocity": 0.67
+            },
+            {
+              "id": "9a9625c2-094e-4b2b-856f-98fb47f16d3b",
+              "pitch": 71,
+              "start": 24,
+              "length": 7,
+              "velocity": 0.6000000000000001
+            },
+            {
+              "id": "4ca706f7-f7bd-43d8-9047-3e4be21a5031",
+              "pitch": 74,
+              "start": 24,
+              "length": 7,
+              "velocity": 0.53
+            }
+          ]
+        },
+        "8bf735d0-3da2-4813-895b-a42b23d67367": {
+          "steps": [
+            0.85,
+            0,
+            0,
+            0,
+            0.55,
+            0,
+            0,
+            0,
+            0.85,
+            0,
+            0,
+            0,
+            0.55,
+            0,
+            0,
+            0,
+            0.85,
+            0,
+            0,
+            0,
+            0.55,
+            0,
+            0,
+            0,
+            0.85,
+            0,
+            0,
+            0,
+            0.55,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "f6326854-338a-4e33-a1ee-6ed219799a1a": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "531f6c42-dba4-4934-9ca4-ab885d155e2f",
+              "pitch": 36,
+              "start": 0,
+              "length": 6,
+              "velocity": 0.7
+            },
+            {
+              "id": "a34d1d45-0be1-49ca-945a-a8ce536a932e",
+              "pitch": 33,
+              "start": 8,
+              "length": 6,
+              "velocity": 0.7
+            },
+            {
+              "id": "a986ea07-59d7-4b34-92ce-a04793ca2411",
+              "pitch": 41,
+              "start": 16,
+              "length": 6,
+              "velocity": 0.7
+            },
+            {
+              "id": "8876a7e3-fbc9-43a3-865f-9e5e7cc708d2",
+              "pitch": 43,
+              "start": 24,
+              "length": 6,
+              "velocity": 0.7
+            }
+          ]
+        },
+        "0e849457-9124-4471-a7d1-6dda52e432cf": {
+          "steps": [
+            0,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0
+          ],
+          "notes": []
+        }
+      }
+    },
+    {
+      "id": "53ce3640-2c43-424c-8f6b-6e80a1162c5f",
+      "name": "Piano · variación",
+      "length": 32,
+      "channels": {
+        "58b5eec2-f3cf-445b-9743-ec0818b963ba": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "d61d4ce8-1124-4b2b-80c2-a9778671d763",
+              "pitch": 60,
+              "start": 0,
+              "length": 3,
+              "velocity": 0.67
+            },
+            {
+              "id": "49d56b8d-72b9-4520-a3f6-304b2d8f4cc6",
+              "pitch": 64,
+              "start": 1.5,
+              "length": 3,
+              "velocity": 0.6000000000000001
+            },
+            {
+              "id": "b0780331-b7a4-4781-b535-3219ff752d32",
+              "pitch": 67,
+              "start": 3,
+              "length": 3,
+              "velocity": 0.53
+            },
+            {
+              "id": "83c51060-cee5-44dd-97e6-ec14a61be969",
+              "pitch": 57,
+              "start": 8,
+              "length": 3,
+              "velocity": 0.67
+            },
+            {
+              "id": "2e16782a-640a-4f15-a8e0-fb1c9bc990d3",
+              "pitch": 60,
+              "start": 9.5,
+              "length": 3,
+              "velocity": 0.6000000000000001
+            },
+            {
+              "id": "f096bdf5-8a8d-4225-aaf5-31de6c044084",
+              "pitch": 64,
+              "start": 11,
+              "length": 3,
+              "velocity": 0.53
+            },
+            {
+              "id": "6fc7f56c-0452-4f71-9d24-011b76f3369b",
+              "pitch": 65,
+              "start": 16,
+              "length": 3,
+              "velocity": 0.67
+            },
+            {
+              "id": "1767f05f-3e85-4b12-8c1e-a112802355fa",
+              "pitch": 69,
+              "start": 17.5,
+              "length": 3,
+              "velocity": 0.6000000000000001
+            },
+            {
+              "id": "01a15502-07d6-4ff8-993c-2510c33fdeb1",
+              "pitch": 72,
+              "start": 19,
+              "length": 3,
+              "velocity": 0.53
+            },
+            {
+              "id": "fb8cf1bb-9dd1-4836-b412-87ef0d31208b",
+              "pitch": 67,
+              "start": 24,
+              "length": 3,
+              "velocity": 0.67
+            },
+            {
+              "id": "02272f98-8ccc-4957-bdf2-c554efbb021c",
+              "pitch": 71,
+              "start": 25.5,
+              "length": 3,
+              "velocity": 0.6000000000000001
+            },
+            {
+              "id": "53fdce89-b278-49f1-98b1-c22976cf9765",
+              "pitch": 74,
+              "start": 27,
+              "length": 3,
+              "velocity": 0.53
+            }
+          ]
+        },
+        "8bf735d0-3da2-4813-895b-a42b23d67367": {
+          "steps": [
+            0.85,
+            0,
+            0,
+            0,
+            0.55,
+            0,
+            0,
+            0,
+            0.85,
+            0,
+            0,
+            0,
+            0.55,
+            0,
+            0,
+            0,
+            0.85,
+            0,
+            0,
+            0,
+            0.55,
+            0,
+            0,
+            0,
+            0.85,
+            0,
+            0,
+            0,
+            0.55,
+            0,
+            0,
+            0
+          ],
+          "notes": []
+        },
+        "f6326854-338a-4e33-a1ee-6ed219799a1a": {
+          "steps": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "notes": [
+            {
+              "id": "726d134d-ed39-4ec3-9414-db885fc12ef1",
+              "pitch": 36,
+              "start": 0,
+              "length": 6,
+              "velocity": 0.7
+            },
+            {
+              "id": "e7429fb7-77f7-4d61-b5ea-e69c12c259f5",
+              "pitch": 33,
+              "start": 8,
+              "length": 6,
+              "velocity": 0.7
+            },
+            {
+              "id": "02955116-4684-48ff-9ef3-93d23a8ef714",
+              "pitch": 41,
+              "start": 16,
+              "length": 6,
+              "velocity": 0.7
+            },
+            {
+              "id": "68d34f87-3207-45e4-9e55-89c11c76c80e",
+              "pitch": 43,
+              "start": 24,
+              "length": 6,
+              "velocity": 0.7
+            }
+          ]
+        },
+        "0e849457-9124-4471-a7d1-6dda52e432cf": {
+          "steps": [
+            0,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0,
+            0.25,
+            0,
+            0.4,
+            0
+          ],
+          "notes": []
+        }
+      }
+    }
+  ],
+  "clips": [
+    {
+      "id": "99d1f53b-b5a3-401e-8e2c-d0d5706d7696",
+      "trackId": "58b5eec2-f3cf-445b-9743-ec0818b963ba",
+      "patternId": "7047fadc-b9d0-407f-9ef0-6d57ce543ede",
+      "laneId": "34abd513-2dc9-4fe7-bfcd-90d31be74b4a",
+      "scope": "pattern",
+      "startBar": 0,
+      "lengthBars": 2,
+      "loop": true
+    },
+    {
+      "id": "a470fb83-2c53-43c6-9f8a-ec9fcf5c2360",
+      "trackId": "58b5eec2-f3cf-445b-9743-ec0818b963ba",
+      "patternId": "53ce3640-2c43-424c-8f6b-6e80a1162c5f",
+      "laneId": "34abd513-2dc9-4fe7-bfcd-90d31be74b4a",
+      "scope": "pattern",
+      "startBar": 2,
+      "lengthBars": 2,
+      "loop": true
+    },
+    {
+      "id": "0bde1b0b-da55-423a-9242-5a7df2e92717",
+      "trackId": "58b5eec2-f3cf-445b-9743-ec0818b963ba",
+      "patternId": "7047fadc-b9d0-407f-9ef0-6d57ce543ede",
+      "laneId": "34abd513-2dc9-4fe7-bfcd-90d31be74b4a",
+      "scope": "pattern",
+      "startBar": 4,
+      "lengthBars": 2,
+      "loop": true
+    },
+    {
+      "id": "992ea914-83a0-46ec-8baf-5cf967bfa66e",
+      "trackId": "58b5eec2-f3cf-445b-9743-ec0818b963ba",
+      "patternId": "53ce3640-2c43-424c-8f6b-6e80a1162c5f",
+      "laneId": "34abd513-2dc9-4fe7-bfcd-90d31be74b4a",
+      "scope": "pattern",
+      "startBar": 6,
+      "lengthBars": 2,
+      "loop": true
+    }
+  ],
+  "samples": [],
+  "lanes": [
+    {
+      "id": "34abd513-2dc9-4fe7-bfcd-90d31be74b4a",
+      "name": "Piano + batería",
+      "color": "#b6a0e4",
+      "muted": false
+    }
+  ]
+}

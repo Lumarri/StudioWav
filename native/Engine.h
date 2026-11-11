@@ -1,4 +1,5 @@
 #pragma once
+#include "ChannelEffects.h"
 #include <array>
 #include <atomic>
 #include <iostream>
@@ -17,6 +18,7 @@ struct Point {
   float value = 0;
 };
 struct Config {
+  ChannelEffectSettings effects;
   String id, instrument, sampleId;
   bool bus = false, muted = false, solo = false, monitor = false;
   float gain = 1, pan = 0, cutoff = 20000, send = 0;
@@ -52,6 +54,7 @@ struct Plugin {
   std::unique_ptr<juce::AudioPluginInstance> instance;
 };
 struct Track {
+  ChannelEffectProcessor effects;
   Config config;
   std::shared_ptr<SampleData> sample;
   juce::AudioBuffer<float> buffer, source;
